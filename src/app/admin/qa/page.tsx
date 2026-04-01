@@ -120,10 +120,13 @@ export default function AdminQAPage() {
                 )}
 
                 <div style={{ display: 'flex', gap: 8, marginTop: 12, alignItems: 'center', flexWrap: 'wrap' }}>
-                  {item.status === 'pending' && answering !== item.id && (
+                  {answering !== item.id && (
                     <button className="btn-primary" style={{ padding: '8px 20px', fontSize: '0.85rem' }}
-                      onClick={() => setAnswering(item.id)}>
-                      답변하기
+                      onClick={() => {
+                        setAnswering(item.id);
+                        setAnswerText(item.answer || '');
+                      }}>
+                      {item.status === 'answered' ? '답변 수정' : '답변하기'}
                     </button>
                   )}
                   <button 
@@ -162,7 +165,7 @@ export default function AdminQAPage() {
                     <div style={{ display: 'flex', gap: 8, marginTop: 12 }}>
                       <button className="btn-primary" style={{ padding: '8px 20px', fontSize: '0.85rem' }}
                         onClick={() => handleAnswer(item.id)}>
-                        답변 등록
+                        {item.status === 'answered' ? '수정 완료' : '답변 등록'}
                       </button>
                       <button className="btn-secondary" style={{ padding: '8px 20px', fontSize: '0.85rem' }}
                         onClick={() => { setAnswering(null); setAnswerText(''); }}>

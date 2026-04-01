@@ -1,13 +1,5 @@
 import nodemailer from 'nodemailer';
 
-const transporter = nodemailer.createTransport({
-  service: 'gmail',
-  auth: {
-    user: process.env.EMAIL_USER,
-    pass: process.env.EMAIL_APP_PASSWORD,
-  },
-});
-
 export async function sendAnswerNotification(
   to: string,
   questionTitle: string,
@@ -15,6 +7,14 @@ export async function sendAnswerNotification(
   if (!process.env.EMAIL_USER || !process.env.EMAIL_APP_PASSWORD) {
     throw new Error('Vercel 환경 변수가 누락되었습니다: EMAIL_USER 또는 EMAIL_APP_PASSWORD 가 없습니다. (Redeploy 시 적용됩니다.)');
   }
+
+  const transporter = nodemailer.createTransport({
+    service: 'gmail',
+    auth: {
+      user: process.env.EMAIL_USER,
+      pass: process.env.EMAIL_APP_PASSWORD,
+    },
+  });
 
   try {
     const info = await transporter.sendMail({

@@ -4,6 +4,7 @@ import { sanitizeText } from '@/lib/sanitize';
 
 import { auth } from '@/lib/auth';
 import { hash } from 'bcryptjs';
+import { sendAdminNotification } from '@/lib/mailer';
 
 export async function GET(request: NextRequest) {
   const { searchParams } = new URL(request.url);
@@ -78,6 +79,9 @@ export async function POST(request: NextRequest) {
         passwordHash,
       },
     });
+
+    // Admin notification (non-blocking)
+    sendAdminNotification('qa', item.authorEmail, item.title).catch(console.error);
 
     return NextResponse.json(item, { status: 201 });
   } catch (error) {

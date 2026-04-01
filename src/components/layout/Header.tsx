@@ -14,17 +14,50 @@ const NAV_ITEMS = [
   { href: '/contact', label: '오시는 길' },
 ];
 
+function AdminStatus() {
+  const { data: session, status } = useSession();
+  const isAdmin = status === 'authenticated' && (session as any)?.user?.role === 'admin';
+
+  if (status === 'loading') return <div style={{ width: 40 }} />;
+
+  if (isAdmin) {
+    return (
+      <div style={{ display: 'flex', alignItems: 'center', gap: 8, marginLeft: 12 }}>
+        <span style={{ 
+          fontSize: '0.7rem', fontWeight: 700, padding: '2px 8px', borderRadius: 4,
+          background: 'rgba(108, 92, 231, 0.2)', color: 'var(--color-accent-light)',
+          border: '1px solid rgba(108, 92, 231, 0.3)'
+        }}>관리자</span>
+        <button 
+          onClick={() => signOut({ callbackUrl: '/' })}
+          style={{
+            background: 'none', border: 'none', color: 'var(--color-text-muted)',
+            fontSize: '0.8rem', cursor: 'pointer', padding: '4px 8px'
+          }}
+        >로그아웃</button>
+      </div>
+    );
+  }
+
+  return (
+    <Link href="/admin/login" style={{
+      fontSize: '0.8rem', color: 'var(--color-text-muted)', textDecoration: 'none',
+      marginLeft: 12, padding: '4px 8px'
+    }}>관리자 로그인</Link>
+  );
+}
+
 export default function Header() {
   const [mobileOpen, setMobileOpen] = useState(false);
   const pathname = usePathname();
 
   return (
-    <header style={{
-      position: 'sticky',
-      top: 0,
-      zIndex: 100,
-      background: 'rgba(15, 23, 42, 0.85)',
-      backdropFilter: 'blur(20px)',
+    <header style={{ 
+      position: 'sticky', 
+      top: 0, 
+      zIndex: 100, 
+      background: 'rgba(15, 23, 42, 0.85)', 
+      backdropFilter: 'blur(20px)', 
       WebkitBackdropFilter: 'blur(20px)',
       borderBottom: '1px solid var(--color-border)',
     }}>
@@ -164,38 +197,5 @@ export default function Header() {
         }
       `}</style>
     </header>
-  );
-}
-
-function AdminStatus() {
-  const { data: session, status } = useSession();
-  const isAdmin = (session as any)?.user?.role === 'admin';
-
-  if (status === 'loading') return <div style={{ width: 40 }} />;
-
-  if (isAdmin) {
-    return (
-      <div style={{ display: 'flex', alignItems: 'center', gap: 8, marginLeft: 12 }}>
-        <span style={{ 
-          fontSize: '0.7rem', fontWeight: 700, padding: '2px 8px', borderRadius: 4,
-          background: 'rgba(108, 92, 231, 0.2)', color: 'var(--color-accent-light)',
-          border: '1px solid rgba(108, 92, 231, 0.3)'
-        }}>관리자</span>
-        <button 
-          onClick={() => signOut({ callbackUrl: '/' })}
-          style={{
-            background: 'none', border: 'none', color: 'var(--color-text-muted)',
-            fontSize: '0.8rem', cursor: 'pointer', padding: '4px 8px'
-          }}
-        >로그아웃</button>
-      </div>
-    );
-  }
-
-  return (
-    <Link href="/admin/login" style={{
-      fontSize: '0.8rem', color: 'var(--color-text-muted)', textDecoration: 'none',
-      marginLeft: 12, padding: '4px 8px'
-    }}>관리자 로그인</Link>
   );
 }

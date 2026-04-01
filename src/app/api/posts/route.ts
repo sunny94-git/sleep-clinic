@@ -4,6 +4,7 @@ import { sanitizeText } from '@/lib/sanitize';
 import { postTweet } from '@/lib/twitter';
 import { auth } from '@/lib/auth';
 import { hash } from 'bcryptjs';
+import { sendAdminNotification } from '@/lib/mailer';
 
 export async function GET(request: NextRequest) {
   const { searchParams } = new URL(request.url);
@@ -98,6 +99,11 @@ export async function POST(request: NextRequest) {
         }).catch(console.error);
       }
     }).catch(console.error);
+
+    // Admin notification for free board (non-blocking)
+    if (post.category === 'free') {
+      sendAdminNotification('board', post.authorName, post.title).catch(console.error);
+    }
 
     return NextResponse.json(post, { status: 201 });
   } catch (error) {

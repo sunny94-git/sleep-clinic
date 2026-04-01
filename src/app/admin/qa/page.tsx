@@ -28,11 +28,17 @@ export default function AdminQAPage() {
 
   const handleAnswer = async (id: string) => {
     if (!answerText.trim()) return;
-    await fetch(`/api/qa/${id}`, {
+    const res = await fetch(`/api/qa/${id}`, {
       method: 'PATCH',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({ answer: answerText }),
     });
+
+    if (!res.ok) {
+      const data = await res.json();
+      alert('답변 등록 실패: ' + (data.error || '이메일 발송에 실패했습니다. 환경구성을 확인하세요.'));
+      return;
+    }
     setAnswering(null);
     setAnswerText('');
     loadItems();

@@ -13,8 +13,7 @@ export async function sendAnswerNotification(
   questionTitle: string,
 ) {
   if (!process.env.EMAIL_USER || !process.env.EMAIL_APP_PASSWORD) {
-    console.warn('[Mailer] EMAIL_USER or EMAIL_APP_PASSWORD not configured — skipping email');
-    return;
+    throw new Error('Vercel 환경 변수가 누락되었습니다: EMAIL_USER 또는 EMAIL_APP_PASSWORD 가 없습니다. (Redeploy 시 적용됩니다.)');
   }
 
   try {
@@ -54,7 +53,9 @@ export async function sendAnswerNotification(
       `,
     });
     console.log('[Mailer] Answer notification sent to', to, 'Message ID:', info.messageId);
-  } catch (error) {
+    return true;
+  } catch (error: any) {
     console.error('[Mailer] Failed to send email:', error);
+    throw new Error('이메일 발송 실패: ' + (error.message || String(error)));
   }
 }

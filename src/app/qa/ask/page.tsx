@@ -142,12 +142,12 @@ export default function AskQuestionPage() {
               </label>
             </div>
 
-            <div style={{ marginBottom: 32, padding: 16, background: 'rgba(0,0,0,0.1)', borderRadius: 8 }}>
-              <label style={{ display: 'block', fontSize: '0.85rem', fontWeight: 600, marginBottom: 8, color: 'var(--color-text-secondary)' }}>
-                비밀번호 (4자리 이상)
+            <div style={{ marginBottom: 32, padding: 20, background: 'rgba(255,255,255,0.03)', borderRadius: 12, border: '1px solid rgba(255,255,255,0.1)' }}>
+              <label style={{ display: 'block', fontSize: '0.85rem', fontWeight: 600, marginBottom: 8, color: 'var(--color-accent-light)' }}>
+                🔒 수정/삭제용 비밀번호 (필수)
               </label>
               <p style={{ fontSize: '0.75rem', color: 'var(--color-text-muted)', marginBottom: 12 }}>
-                비공개 글 열람 및 추후 질문 수정/삭제 시 필요합니다.
+                비공개 글 열람 및 본인이 작성한 질문을 수정하거나 삭제할 때 사용됩니다. (4자리 이상)
               </p>
               <input
                 type="password"

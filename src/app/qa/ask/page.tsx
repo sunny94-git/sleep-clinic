@@ -18,6 +18,7 @@ export default function AskQuestionPage() {
     content: '',
     authorEmail: '',
     isPrivate: false,
+    password: '',
   });
   const [submitting, setSubmitting] = useState(false);
   const [error, setError] = useState('');
@@ -126,7 +127,7 @@ export default function AskQuestionPage() {
               />
             </div>
 
-            <div style={{ marginBottom: 32 }}>
+            <div style={{ marginBottom: form.isPrivate ? 16 : 32 }}>
               <label style={{
                 display: 'flex', alignItems: 'center', gap: 10, cursor: 'pointer',
                 fontSize: '0.9rem', color: 'var(--color-text-secondary)',
@@ -140,6 +141,23 @@ export default function AskQuestionPage() {
                 🔒 비공개 질문으로 등록
               </label>
             </div>
+
+            {form.isPrivate && (
+              <div style={{ marginBottom: 32, padding: 16, background: 'rgba(0,0,0,0.1)', borderRadius: 8 }}>
+                <label style={{ display: 'block', fontSize: '0.85rem', fontWeight: 600, marginBottom: 8, color: 'var(--color-text-secondary)' }}>
+                  비밀번호 (4자리 이상 숫자/문자)
+                </label>
+                <input
+                  type="password"
+                  className="input-field"
+                  placeholder="비공개 글 확인 시 사용할 비밀번호"
+                  value={form.password}
+                  onChange={e => setForm(f => ({ ...f, password: e.target.value }))}
+                  required={form.isPrivate}
+                  minLength={4}
+                />
+              </div>
+            )}
 
             <div style={{ display: 'flex', gap: 12 }}>
               <button type="submit" className="btn-primary" disabled={submitting}>

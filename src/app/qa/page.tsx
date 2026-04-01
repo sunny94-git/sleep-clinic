@@ -13,6 +13,7 @@ interface QAItem {
   createdAt: string;
   content: string;
   answer?: string;
+  _verified?: boolean;
 }
 
 const TABS = [
@@ -30,7 +31,14 @@ export default function QAPage() {
   const [totalPages, setTotalPages] = useState(1);
   const [loading, setLoading] = useState(true);
 
+  const [isAdmin, setIsAdmin] = useState(false);
+  
   const [expandedId, setExpandedId] = useState<string | null>(null);
+  const [verifyingId, setVerifyingId] = useState<string | null>(null);
+  const [verifyEmail, setVerifyEmail] = useState('');
+  const [verifyPassword, setVerifyPassword] = useState('');
+  const [verifyError, setVerifyError] = useState('');
+  const [isVerifying, setIsVerifying] = useState(false);
 
   useEffect(() => {
     setLoading(true);
@@ -39,11 +47,36 @@ export default function QAPage() {
       .then(data => {
         setItems(data.items || []);
         setTotalPages(data.totalPages || 1);
+        setIsAdmin(data.isAdmin || false);
         setExpandedId(null);
+        setVerifyingId(null);
       })
       .catch(() => setItems([]))
       .finally(() => setLoading(false));
   }, [category, page]);
+
+  const handleVerify = async (e: React.FormEvent, id: string) => {
+    e.preventDefault();
+    setIsVerifying(true);
+    setVerifyError('');
+    try {
+      const res = await fetch(`/api/qa/${id}/verify`, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ email: verifyEmail, password: verifyPassword }),
+      });
+      const data = await res.json();
+      if (!res.ok) throw new Error(data.error || '인증에 실패했습니다.');
+
+      setItems(prev => prev.map(item => item.id === id ? { ...item, ...data, _verified: true } : item));
+      setVerifyingId(null);
+      setExpandedId(id);
+    } catch (err) {
+      setVerifyError(err instanceof Error ? err.message : '오류가 발생했습니다.');
+    } finally {
+      setIsVerifying(false);
+    }
+  };
 
   return (
     <div>
@@ -101,8 +134,24 @@ export default function QAPage() {
                       transition: 'all 0.2s',
                     }}
                     onClick={() => {
-                      if (!item.isPrivate) {
+                      if (isAdmin) {
                         setExpandedId(expandedId === item.id ? null : item.id);
+                        return;
+                      }
+
+                      if (!item.isPrivate || item._verified) {
+                        setExpandedId(expandedId === item.id ? null : item.id);
+                        setVerifyingId(null);
+                      } else {
+                        if (expandedId === item.id || verifyingId === item.id) {
+                          setExpandedId(null);
+                          setVerifyingId(null);
+                        } else {
+                          setVerifyingId(item.id);
+                          setVerifyError('');
+                          setVerifyPassword('');
+                          setVerifyEmail('');
+                        }
                       }
                     }}
                   >
@@ -122,18 +171,49 @@ export default function QAPage() {
                         {QA_CATEGORY_LABELS[item.category as keyof typeof QA_CATEGORY_LABELS]}
                       </span>
                       <span>{new Date(item.createdAt).toLocaleDateString('ko-KR')}</span>
-                      {!item.isPrivate && (
+                      {!item.isPrivate || isAdmin || item._verified ? (
                         <span style={{ 
                           display: 'inline-block', 
                           transform: expandedId === item.id ? 'rotate(180deg)' : 'rotate(0deg)',
                           transition: 'transform 0.2s',
                           fontSize: '0.8rem'
                         }}>▼</span>
+                      ) : (
+                        item.isPrivate && verifyingId !== item.id && (
+                           <span style={{ fontSize: '0.75rem', fontWeight: 600, color: 'var(--color-accent-light)' }}>
+                             인증필요
+                           </span>
+                        )
                       )}
                     </div>
                   </div>
                   
-                  {expandedId === item.id && !item.isPrivate && (
+                  {verifyingId === item.id && (
+                    <div className="glass-card" style={{ marginTop: 8, padding: '24px', background: 'rgba(255,255,255,0.02)', borderTop: 'none' }}>
+                       <form onSubmit={(e) => handleVerify(e, item.id)}>
+                         <p style={{ marginBottom: 16, fontSize: '0.9rem', color: 'var(--color-text-secondary)' }}>
+                           비공개 질문을 열람하려면 작성 시 입력한 이메일과 비밀번호를 입력해주세요.
+                         </p>
+                         {verifyError && (
+                           <p style={{ color: '#fca5a5', fontSize: '0.85rem', marginBottom: 16, background: 'rgba(239,68,68,0.1)', padding: '8px 12px', borderRadius: 6 }}>
+                             {verifyError}
+                           </p>
+                         )}
+                         <div style={{ display: 'flex', gap: 12, flexWrap: 'wrap', marginBottom: 16 }}>
+                           <input type="email" placeholder="이메일" value={verifyEmail} onChange={e => setVerifyEmail(e.target.value)} required className="input-field" style={{ flex: 1, minWidth: 200 }} />
+                           <input type="password" placeholder="비밀번호" value={verifyPassword} onChange={e => setVerifyPassword(e.target.value)} required className="input-field" style={{ flex: 1, minWidth: 200 }} />
+                         </div>
+                         <div style={{ display: 'flex', gap: 8 }}>
+                           <button type="submit" className="btn-primary" disabled={isVerifying} style={{ padding: '8px 16px', fontSize: '0.85rem' }}>
+                             {isVerifying ? '확인 중...' : '본인 확인'}
+                           </button>
+                           <button type="button" className="btn-secondary" onClick={() => setVerifyingId(null)} style={{ padding: '8px 16px', fontSize: '0.85rem' }}>취소</button>
+                         </div>
+                       </form>
+                    </div>
+                  )}
+
+                  {expandedId === item.id && (!item.isPrivate || isAdmin || item._verified) && (
                     <div className="glass-card" style={{ 
                       marginTop: 8, 
                       padding: '24px', 

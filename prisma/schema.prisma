@@ -45,6 +45,7 @@ model QAItem {
   title       String
   content     String     @db.Text
   authorEmail String     @map("author_email")
+  passwordHash String?   @map("password_hash")
   isPrivate   Boolean    @default(false) @map("is_private")
   status      QAStatus   @default(pending)
   answer      String?    @db.Text

@@ -2,6 +2,7 @@
 
 import Link from 'next/link';
 import { useState, useEffect } from 'react';
+import { useSession } from 'next-auth/react';
 import { POST_CATEGORY_LABELS } from '@/types';
 
 interface Post {
@@ -21,6 +22,8 @@ const TABS = [
 ];
 
 export default function BoardPage() {
+  const { data: session } = useSession();
+  const isAdmin = (session as any)?.user?.role === 'admin';
   const [posts, setPosts] = useState<Post[]>([]);
   const [category, setCategory] = useState('all');
   const [page, setPage] = useState(1);
@@ -75,9 +78,11 @@ export default function BoardPage() {
                 </button>
               ))}
             </div>
-            <Link href="/board/write" className="btn-primary" style={{ padding: '10px 24px', fontSize: '0.875rem' }}>
-              ✏️ 글쓰기
-            </Link>
+            {(isAdmin || (category !== 'notice' && category !== 'sleep_info')) && (
+              <Link href="/board/write" className="btn-primary" style={{ padding: '10px 24px', fontSize: '0.875rem' }}>
+                ✏️ 글쓰기
+              </Link>
+            )}
           </div>
 
           {/* Posts List */}

@@ -1,6 +1,6 @@
 'use client';
 
-import { useState, useEffect } from 'react';
+import { useState, useEffect, use } from 'react';
 import { useRouter } from 'next/navigation';
 import { useSession } from 'next-auth/react';
 
@@ -10,60 +10,69 @@ const ALL_CATEGORIES = [
   { value: 'sleep_info', label: '수면정보' },
 ];
 
-export default function WritePostPage() {
+export default function EditPostPage({ params }: { params: Promise<{ id: string }> }) {
   const router = useRouter();
-  const { data: session, status } = useSession();
+  const { id } = use(params);
+  const { data: session } = useSession();
   const isAdmin = (session as any)?.user?.role === 'admin';
-  
+
   const [form, setForm] = useState({ 
     category: 'free', 
     title: '', 
     content: '', 
     authorName: '',
-    password: ''
+    password: '' 
   });
+  const [loading, setLoading] = useState(true);
   const [submitting, setSubmitting] = useState(false);
   const [error, setError] = useState('');
 
-  // Allowed categories based on role
   const availableCategories = isAdmin 
     ? ALL_CATEGORIES 
     : ALL_CATEGORIES.filter(c => c.value === 'free');
 
   useEffect(() => {
-    if (status === 'unauthenticated' && form.category !== 'free') {
-      setForm(f => ({ ...f, category: 'free' }));
-    }
-    if (isAdmin && form.authorName === '') {
-       setForm(f => ({ ...f, authorName: '관리자' }));
-    }
-  }, [isAdmin, status, form.category, form.authorName]);
+    fetch(`/api/posts/${id}`)
+      .then(res => res.json())
+      .then(data => {
+        if (data.error) throw new Error(data.error);
+        setForm(f => ({
+          ...f,
+          category: data.category,
+          title: data.title,
+          content: data.content,
+          authorName: data.authorName,
+        }));
+      })
+      .catch(err => setError(err.message))
+      .finally(() => setLoading(false));
+  }, [id]);
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     setError('');
-    
+
     if (!isAdmin && (!form.password || form.password.length < 4)) {
-      setError('비밀번호를 4자리 이상 입력해주세요.');
+      setError('본인 확인을 위해 비밀번호를 입력해주세요.');
       return;
     }
 
     setSubmitting(true);
 
     try {
-      const res = await fetch('/api/posts', {
-        method: 'POST',
+      const res = await fetch(`/api/posts/${id}`, {
+        method: 'PATCH',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify(form),
       });
 
       if (!res.ok) {
         const data = await res.json();
-        throw new Error(data.error || '작성에 실패했습니다.');
+        throw new Error(data.error || '수정에 실패했습니다.');
       }
 
-      const post = await res.json();
-      router.push(`/board/${post.id}`);
+      alert('수정되었습니다.');
+      router.push(`/board/${id}`);
     } catch (err) {
       setError(err instanceof Error ? err.message : '오류가 발생했습니다.');
     } finally {
@@ -71,15 +80,17 @@ export default function WritePostPage() {
     }
   };
 
+  if (loading) return <div style={{ padding: 100, textAlign: 'center' }}>로딩중...</div>;
+
   return (
     <div>
       <section style={{ padding: '80px 24px 40px' }}>
         <div className="section-container" style={{ maxWidth: 700 }}>
           <h1 style={{ fontSize: '1.75rem', fontWeight: 800, marginBottom: 8 }}>
-            <span className="gradient-text">글쓰기</span>
+            <span className="gradient-text">게시글 수정</span>
           </h1>
           <p style={{ color: 'var(--color-text-muted)', marginBottom: 32, fontSize: '0.9rem' }}>
-            게시판에 새 글을 작성합니다.
+            기존에 작성한 글을 수정합니다.
           </p>
 
           {error && (
@@ -117,26 +128,26 @@ export default function WritePostPage() {
               </label>
               <input
                 className="input-field"
-                placeholder="이름을 입력하세요"
+                placeholder="이름"
                 value={form.authorName}
                 onChange={e => setForm(f => ({ ...f, authorName: e.target.value }))}
                 required
+                disabled={!isAdmin}
               />
             </div>
 
             {!isAdmin && (
-              <div style={{ marginBottom: 24 }}>
-                <label style={{ display: 'block', fontSize: '0.85rem', fontWeight: 600, marginBottom: 8, color: 'var(--color-text-secondary)' }}>
-                  비밀번호
+              <div style={{ marginBottom: 24, padding: 16, background: 'rgba(0,0,0,0.1)', borderRadius: 8 }}>
+                <label style={{ display: 'block', fontSize: '0.85rem', fontWeight: 600, marginBottom: 8, color: 'var(--color-accent-light)' }}>
+                  비밀번호 인증
                 </label>
                 <input
                   type="password"
                   className="input-field"
-                  placeholder="수정/삭제 시 필요한 비밀번호 (4자리 이상)"
+                  placeholder="작성 시 입력한 비밀번호"
                   value={form.password}
                   onChange={e => setForm(f => ({ ...f, password: e.target.value }))}
                   required
-                  minLength={4}
                 />
               </div>
             )}
@@ -147,7 +158,7 @@ export default function WritePostPage() {
               </label>
               <input
                 className="input-field"
-                placeholder="제목을 입력하세요"
+                placeholder="제목"
                 value={form.title}
                 onChange={e => setForm(f => ({ ...f, title: e.target.value }))}
                 required
@@ -160,7 +171,7 @@ export default function WritePostPage() {
               </label>
               <textarea
                 className="textarea-field"
-                placeholder="내용을 입력하세요"
+                placeholder="내용"
                 rows={10}
                 value={form.content}
                 onChange={e => setForm(f => ({ ...f, content: e.target.value }))}
@@ -170,7 +181,7 @@ export default function WritePostPage() {
 
             <div style={{ display: 'flex', gap: 12 }}>
               <button type="submit" className="btn-primary" disabled={submitting}>
-                {submitting ? '등록중...' : '등록하기'}
+                {submitting ? '수정 중...' : '수정 완료'}
               </button>
               <button type="button" className="btn-secondary" onClick={() => router.back()}>
                 취소

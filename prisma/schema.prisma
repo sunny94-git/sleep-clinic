@@ -30,6 +30,7 @@ model Post {
   title       String
   content     String       @db.Text
   authorName  String       @map("author_name")
+  passwordHash String?     @map("password_hash")
   tweetId     String?      @map("tweet_id")
   isPublished Boolean      @default(true) @map("is_published")
   viewCount   Int          @default(0) @map("view_count")

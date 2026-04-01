@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import "./globals.css";
 import Header from "@/components/layout/Header";
 import Footer from "@/components/layout/Footer";
+import Providers from "@/components/layout/Providers";
 
 export const metadata: Metadata = {
   title: {
@@ -73,9 +74,11 @@ export default function RootLayout({
         />
       </head>
       <body suppressHydrationWarning>
-        <Header />
-        <main style={{ minHeight: "calc(100vh - 72px)" }}>{children}</main>
-        <Footer />
+        <Providers>
+          <Header />
+          <main style={{ minHeight: "calc(100vh - 72px)" }}>{children}</main>
+          <Footer />
+        </Providers>
       </body>
     </html>
   );

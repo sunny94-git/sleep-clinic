@@ -30,8 +30,6 @@ export default function QAPage() {
   const [page, setPage] = useState(1);
   const [totalPages, setTotalPages] = useState(1);
   const [loading, setLoading] = useState(true);
-
-  const [isAdmin, setIsAdmin] = useState(false);
   
   const [expandedId, setExpandedId] = useState<string | null>(null);
   const [verifyingId, setVerifyingId] = useState<string | null>(null);
@@ -47,7 +45,6 @@ export default function QAPage() {
       .then(data => {
         setItems(data.items || []);
         setTotalPages(data.totalPages || 1);
-        setIsAdmin(data.isAdmin || false);
         setExpandedId(null);
         setVerifyingId(null);
       })
@@ -134,11 +131,6 @@ export default function QAPage() {
                       transition: 'all 0.2s',
                     }}
                     onClick={() => {
-                      if (isAdmin) {
-                        setExpandedId(expandedId === item.id ? null : item.id);
-                        return;
-                      }
-
                       if (!item.isPrivate || item._verified) {
                         setExpandedId(expandedId === item.id ? null : item.id);
                         setVerifyingId(null);
@@ -171,7 +163,7 @@ export default function QAPage() {
                         {QA_CATEGORY_LABELS[item.category as keyof typeof QA_CATEGORY_LABELS]}
                       </span>
                       <span>{new Date(item.createdAt).toLocaleDateString('ko-KR')}</span>
-                      {!item.isPrivate || isAdmin || item._verified ? (
+                      {!item.isPrivate || item._verified ? (
                         <span style={{ 
                           display: 'inline-block', 
                           transform: expandedId === item.id ? 'rotate(180deg)' : 'rotate(0deg)',
@@ -213,7 +205,7 @@ export default function QAPage() {
                     </div>
                   )}
 
-                  {expandedId === item.id && (!item.isPrivate || isAdmin || item._verified) && (
+                  {expandedId === item.id && (!item.isPrivate || item._verified) && (
                     <div className="glass-card" style={{ 
                       marginTop: 8, 
                       padding: '24px', 

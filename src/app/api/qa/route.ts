@@ -27,11 +27,13 @@ export async function GET(request: NextRequest) {
     prisma.qAItem.count({ where }),
   ]);
 
+  const adminView = searchParams.get('adminView') === 'true';
   const session = await auth();
-  const isAdmin = (session as any)?.user?.role === 'admin';
+  const isAdminSession = (session as any)?.user?.role === 'admin';
+  const shouldBypass = adminView && isAdminSession;
 
   const maskedItems = items.map((item: any) => {
-    if (item.isPrivate && !isAdmin) {
+    if (item.isPrivate && !shouldBypass) {
       return {
         ...item,
         content: '비공개 질문입니다.',
@@ -45,7 +47,6 @@ export async function GET(request: NextRequest) {
 
   return NextResponse.json({
     items: maskedItems,
-    isAdmin,
     total,
     page,
     totalPages: Math.ceil(total / limit),

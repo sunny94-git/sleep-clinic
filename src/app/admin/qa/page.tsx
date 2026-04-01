@@ -17,7 +17,7 @@ export default function AdminQAPage() {
 
   const loadItems = () => {
     setLoading(true);
-    fetch('/api/qa?limit=50')
+    fetch('/api/qa?limit=50&adminView=true')
       .then(r => r.json())
       .then(data => setItems(data.items || []))
       .catch(console.error)

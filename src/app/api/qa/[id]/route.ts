@@ -49,7 +49,7 @@ export async function PATCH(
       },
     });
 
-    sendAnswerNotification(item.authorEmail, item.title).catch(console.error);
+    await sendAnswerNotification(item.authorEmail, item.title).catch(console.error);
     return NextResponse.json(item);
   } catch (error) {
     console.error('QA PATCH error:', error);

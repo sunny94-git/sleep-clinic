@@ -2,7 +2,7 @@ import { NextRequest, NextResponse } from 'next/server';
 import prisma from '@/lib/prisma';
 import { auth } from '@/lib/auth';
 import { sanitizeText } from '@/lib/sanitize';
-import { sendAnswerNotification } from '@/lib/resend';
+import { sendAnswerNotification } from '@/lib/mailer';
 
 export async function GET(
   _request: NextRequest,
@@ -49,7 +49,7 @@ export async function PATCH(
       },
     });
 
-    sendAnswerNotification(item.authorEmail, item.title, answer).catch(console.error);
+    sendAnswerNotification(item.authorEmail, item.title).catch(console.error);
     return NextResponse.json(item);
   } catch (error) {
     console.error('QA PATCH error:', error);

@@ -9,18 +9,22 @@ export async function GET(
   { params }: { params: Promise<{ id: string }> }
 ) {
   const { id } = await params;
+  const session = await auth();
+  const isAdmin = (session as any)?.user?.role === 'admin';
 
-  const post = await prisma.post.update({
+  // Try to increment view count only if it's already published
+  let post = await prisma.post.update({
     where: { id, isPublished: true },
     data: { viewCount: { increment: 1 } },
   }).catch(() => null);
 
+  // Fallback for admins who can see unpublished posts
   if (!post) {
-    // If update failed (maybe viewCount not needed or post not found), try direct find
-    const found = await prisma.post.findUnique({ where: { id } });
-    if (!found) return NextResponse.json({ error: '게시글을 찾을 수 없습니다.' }, { status: 404 });
-    const { passwordHash, ...rest } = found;
-    return NextResponse.json(rest);
+    post = await prisma.post.findUnique({ where: { id } });
+  }
+
+  if (!post || (!post.isPublished && !isAdmin)) {
+    return NextResponse.json({ error: '게시글을 찾을 수 없습니다.' }, { status: 404 });
   }
 
   const { passwordHash, ...rest } = post;

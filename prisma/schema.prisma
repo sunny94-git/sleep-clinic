@@ -1,0 +1,57 @@
+generator client {
+  provider = "prisma-client"
+  output   = "../src/generated/prisma"
+}
+
+datasource db {
+  provider = "postgresql"
+}
+
+enum PostCategory {
+  notice
+  free
+  sleep_info
+}
+
+enum QACategory {
+  consultation
+  treatment
+  cost
+  symptom
+}
+
+enum QAStatus {
+  pending
+  answered
+}
+
+model Post {
+  id          String       @id @default(uuid())
+  category    PostCategory
+  title       String
+  content     String       @db.Text
+  authorName  String       @map("author_name")
+  tweetId     String?      @map("tweet_id")
+  isPublished Boolean      @default(true) @map("is_published")
+  viewCount   Int          @default(0) @map("view_count")
+  createdAt   DateTime     @default(now()) @map("created_at")
+  updatedAt   DateTime     @updatedAt @map("updated_at")
+
+  @@map("posts")
+}
+
+model QAItem {
+  id          String     @id @default(uuid())
+  category    QACategory
+  title       String
+  content     String     @db.Text
+  authorEmail String     @map("author_email")
+  isPrivate   Boolean    @default(false) @map("is_private")
+  status      QAStatus   @default(pending)
+  answer      String?    @db.Text
+  answeredAt  DateTime?  @map("answered_at")
+  createdAt   DateTime   @default(now()) @map("created_at")
+  updatedAt   DateTime   @updatedAt @map("updated_at")
+
+  @@map("qa_items")
+}

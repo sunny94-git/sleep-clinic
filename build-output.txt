@@ -1,0 +1,71 @@
+﻿
+> sleep-clinic@0.1.0 build
+> next build
+
+▲ Next.js 16.2.1 (Turbopack)
+- Environments: .env.local, .env
+
+node.exe : ⚠ The "middlewa
+re" file convention is dep
+recated. Please use "proxy
+" instead. Learn more: htt
+ps://nextjs.org/docs/messa
+ges/middleware-to-proxy
+위치 줄:1 문자:1
++ & "C:\Program Files\node
+js/node.exe" "C:\Program F
+iles\nodejs/node_mo ...
++ ~~~~~~~~~~~~~~~~~~~~~~~~
+~~~~~~~~~~~~~~~~~~~~~~~~~~
+~~~~~~~~~~~~~~~~~~~
+    + CategoryInfo        
+      : NotSpecified: (⚠  
+   The "middlewa...lewa   
+ re-to-proxy:String) [    
+], RemoteException
+    + FullyQualifiedError 
+   Id : NativeCommandErr  
+  or
+ 
+  Creating an optimized production build ...
+✓ Compiled successfully in 3.3s
+  Running TypeScript ...
+  Finished TypeScript in 2.8s ...
+  Collecting page data using 15 workers ...
+  Generating static pages using 15 workers (0/19) ...
+  Generating static pages using 15 workers (4/19) 
+  Generating static pages using 15 workers (9/19) 
+  Generating static pages using 15 workers (14/19) 
+✓ Generating static pages using 15 workers (19/19) in 5.6s
+  Finalizing page optimization ...
+
+Route (app)
+┌ ○ /
+├ ○ /_not-found
+├ ○ /about
+├ ○ /admin
+├ ○ /admin/login
+├ ○ /admin/posts
+├ ○ /admin/qa
+├ ƒ /api/auth/[...nextauth]
+├ ƒ /api/posts
+├ ƒ /api/posts/[id]
+├ ƒ /api/qa
+├ ƒ /api/qa/[id]
+├ ○ /board
+├ ƒ /board/[id]
+├ ○ /board/write
+├ ○ /contact
+├ ○ /qa
+├ ○ /qa/ask
+├ ○ /robots.txt
+├ ○ /sitemap.xml
+├ ○ /sleep-info
+└ ƒ /sleep-info/[slug]
+
+
+ƒ Proxy (Middleware)
+
+○  (Static)   prerendered as static content
+ƒ  (Dynamic)  server-rendered on demand
+

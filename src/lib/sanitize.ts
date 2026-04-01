@@ -1,12 +1,11 @@
-import DOMPurify from 'isomorphic-dompurify';
-
 export function sanitizeHtml(dirty: string): string {
-  return DOMPurify.sanitize(dirty, {
-    ALLOWED_TAGS: ['b', 'i', 'em', 'strong', 'p', 'br', 'ul', 'ol', 'li', 'a', 'h2', 'h3', 'h4', 'blockquote'],
-    ALLOWED_ATTR: ['href', 'target', 'rel'],
-  });
+  // If we ever need to sanitize HTML safely on server, we can use a dedicated library like 'striptags' or 'xss'.
+  // Currently unused. Let's just strip basic script/iframe tags as a primitive substitute.
+  return dirty.replace(/<(script|iframe|object|embed|svg|math)[^>]*>.*?<\/\1>/gi, '');
 }
 
 export function sanitizeText(dirty: string): string {
-  return DOMPurify.sanitize(dirty, { ALLOWED_TAGS: [] });
+  if (!dirty) return '';
+  // Strip all HTML tags
+  return dirty.replace(/<[^>]*>?/gm, '');
 }

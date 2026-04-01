@@ -13,7 +13,7 @@ const ALL_CATEGORIES = [
 export default function WritePostPage() {
   const router = useRouter();
   const { data: session, status } = useSession();
-  const isAdmin = (session as any)?.user?.role === 'admin';
+  const isAdmin = status === 'authenticated' && (session as any)?.user?.role === 'admin';
   
   const [form, setForm] = useState({ 
     category: 'free', 

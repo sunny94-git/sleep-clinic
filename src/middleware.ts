@@ -1,10 +1,19 @@
-// Note: Next.js 16 deprecated middleware in favor of "proxy".
-// For now, admin route protection is handled at the page/API level.
-// Each admin page checks the session client-side, 
-// and each admin API route checks auth server-side.
+import { auth } from "@/lib/auth";
 
-export { auth as middleware } from '@/lib/auth';
+export default auth((req) => {
+  const isAdminPage = req.nextUrl.pathname.startsWith("/admin");
+  const isLoginPage = req.nextUrl.pathname === "/admin/login";
+  
+  if (isAdminPage && !isLoginPage) {
+    const isLoggedIn = !!req.auth;
+    const isAdmin = (req.auth?.user as any)?.role === 'admin';
+    
+    if (!isLoggedIn || !isAdmin) {
+      return Response.redirect(new URL("/admin/login", req.nextUrl.origin));
+    }
+  }
+});
 
 export const config = {
-  matcher: ['/admin/((?!login).*)'],
+  matcher: ["/admin/:path*"],
 };

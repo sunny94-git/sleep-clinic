@@ -22,8 +22,8 @@ const TABS = [
 ];
 
 export default function BoardPage() {
-  const { data: session } = useSession();
-  const isAdmin = (session as any)?.user?.role === 'admin';
+  const { data: session, status } = useSession();
+  const isAdmin = status === 'authenticated' && (session as any)?.user?.role === 'admin';
   const [posts, setPosts] = useState<Post[]>([]);
   const [category, setCategory] = useState('all');
   const [page, setPage] = useState(1);

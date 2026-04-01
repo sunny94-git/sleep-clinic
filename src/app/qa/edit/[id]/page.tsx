@@ -1,6 +1,6 @@
 'use client';
 
-import { useState } from 'react';
+import { useState, useEffect, use } from 'react';
 import { useRouter } from 'next/navigation';
 
 const CATEGORIES = [
@@ -10,8 +10,9 @@ const CATEGORIES = [
   { value: 'symptom', label: '증상문의' },
 ];
 
-export default function AskQuestionPage() {
+export default function EditQuestionPage({ params }: { params: Promise<{ id: string }> }) {
   const router = useRouter();
+  const { id } = use(params);
   const [form, setForm] = useState({
     category: 'consultation',
     title: '',
@@ -20,8 +21,32 @@ export default function AskQuestionPage() {
     isPrivate: false,
     password: '',
   });
+  const [loading, setLoading] = useState(true);
   const [submitting, setSubmitting] = useState(false);
   const [error, setError] = useState('');
+
+  useEffect(() => {
+    fetch(`/api/qa/${id}`)
+      .then(res => res.json())
+      .then(data => {
+        if (data.error) throw new Error(data.error);
+        if (data.status === 'answered') {
+           alert('이미 답변된 질문은 수정할 수 없습니다.');
+           router.push('/qa');
+           return;
+        }
+        setForm(f => ({
+          ...f,
+          category: data.category,
+          title: data.title,
+          content: data.content,
+          authorEmail: data.authorEmail,
+          isPrivate: data.isPrivate,
+        }));
+      })
+      .catch(err => setError(err.message))
+      .finally(() => setLoading(false));
+  }, [id, router]);
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -29,15 +54,16 @@ export default function AskQuestionPage() {
     setSubmitting(true);
 
     try {
-      const res = await fetch('/api/qa', {
-        method: 'POST',
+      const res = await fetch(`/api/qa/${id}`, {
+        method: 'PATCH',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify(form),
       });
       if (!res.ok) {
         const data = await res.json();
-        throw new Error(data.error || '등록에 실패했습니다.');
+        throw new Error(data.error || '수정에 실패했습니다.');
       }
+      alert('수정되었습니다.');
       router.push('/qa');
     } catch (err) {
       setError(err instanceof Error ? err.message : '오류가 발생했습니다.');
@@ -46,15 +72,17 @@ export default function AskQuestionPage() {
     }
   };
 
+  if (loading) return <div style={{ padding: 100, textAlign: 'center' }}>로딩중...</div>;
+
   return (
     <div>
       <section style={{ padding: '80px 24px 40px' }}>
         <div className="section-container" style={{ maxWidth: 700 }}>
           <h1 style={{ fontSize: '1.75rem', fontWeight: 800, marginBottom: 8 }}>
-            <span className="gradient-text">질문하기</span>
+            <span className="gradient-text">질문 수정하기</span>
           </h1>
           <p style={{ color: 'var(--color-text-muted)', marginBottom: 32, fontSize: '0.9rem' }}>
-            궁금한 점을 남겨주시면 전문의가 답변해드립니다.
+            기존에 작성한 내용을 수정합니다.
           </p>
 
           {error && (
@@ -84,20 +112,6 @@ export default function AskQuestionPage() {
                   </button>
                 ))}
               </div>
-            </div>
-
-            <div style={{ marginBottom: 24 }}>
-              <label style={{ display: 'block', fontSize: '0.85rem', fontWeight: 600, marginBottom: 8, color: 'var(--color-text-secondary)' }}>
-                이메일
-              </label>
-              <input
-                type="email"
-                className="input-field"
-                placeholder="답변 알림을 받을 이메일"
-                value={form.authorEmail}
-                onChange={e => setForm(f => ({ ...f, authorEmail: e.target.value }))}
-                required
-              />
             </div>
 
             <div style={{ marginBottom: 24 }}>
@@ -138,21 +152,21 @@ export default function AskQuestionPage() {
                   onChange={e => setForm(f => ({ ...f, isPrivate: e.target.checked }))}
                   style={{ width: 18, height: 18, accentColor: 'var(--color-accent)' }}
                 />
-                🔒 비공개 질문으로 등록
+                🔒 비공개 질문으로 설정
               </label>
             </div>
 
             <div style={{ marginBottom: 32, padding: 16, background: 'rgba(0,0,0,0.1)', borderRadius: 8 }}>
               <label style={{ display: 'block', fontSize: '0.85rem', fontWeight: 600, marginBottom: 8, color: 'var(--color-text-secondary)' }}>
-                비밀번호 (4자리 이상)
+                본인 확인 비밀번호
               </label>
               <p style={{ fontSize: '0.75rem', color: 'var(--color-text-muted)', marginBottom: 12 }}>
-                비공개 글 열람 및 추후 질문 수정/삭제 시 필요합니다.
+                작성 시 입력했던 비밀번호를 입력해주세요.
               </p>
               <input
                 type="password"
                 className="input-field"
-                placeholder="비밀번호를 입력하세요"
+                placeholder="비밀번호"
                 value={form.password}
                 onChange={e => setForm(f => ({ ...f, password: e.target.value }))}
                 required
@@ -162,7 +176,7 @@ export default function AskQuestionPage() {
 
             <div style={{ display: 'flex', gap: 12 }}>
               <button type="submit" className="btn-primary" disabled={submitting}>
-                {submitting ? '등록중...' : '질문 등록하기'}
+                {submitting ? '수정 중...' : '수정 완료'}
               </button>
               <button type="button" className="btn-secondary" onClick={() => router.back()}>
                 취소

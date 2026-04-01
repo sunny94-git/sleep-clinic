@@ -38,6 +38,10 @@ export default function QAPage() {
   const [verifyError, setVerifyError] = useState('');
   const [isVerifying, setIsVerifying] = useState(false);
 
+  const [deletingId, setDeletingId] = useState<string | null>(null);
+  const [deletePassword, setDeletePassword] = useState('');
+  const [isDeleting, setIsDeleting] = useState(false);
+
   useEffect(() => {
     setLoading(true);
     fetch(`/api/qa?category=${category}&page=${page}&limit=10`)
@@ -47,6 +51,7 @@ export default function QAPage() {
         setTotalPages(data.totalPages || 1);
         setExpandedId(null);
         setVerifyingId(null);
+        setDeletingId(null);
       })
       .catch(() => setItems([]))
       .finally(() => setLoading(false));
@@ -72,6 +77,32 @@ export default function QAPage() {
       setVerifyError(err instanceof Error ? err.message : '오류가 발생했습니다.');
     } finally {
       setIsVerifying(false);
+    }
+  };
+
+  const handleDelete = async (id: string) => {
+    if (!deletePassword) {
+      alert('비밀번호를 입력해주세요.');
+      return;
+    }
+    setIsDeleting(true);
+    try {
+      const res = await fetch(`/api/qa/${id}`, {
+        method: 'DELETE',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ password: deletePassword }),
+      });
+      const data = await res.json();
+      if (!res.ok) throw new Error(data.error || '삭제에 실패했습니다.');
+
+      alert('삭제되었습니다.');
+      setItems(prev => prev.filter(item => item.id !== id));
+      setDeletingId(null);
+      setDeletePassword('');
+    } catch (err) {
+      alert(err instanceof Error ? err.message : '오류가 발생했습니다.');
+    } finally {
+      setIsDeleting(false);
     }
   };
 
@@ -134,15 +165,18 @@ export default function QAPage() {
                       if (!item.isPrivate || item._verified) {
                         setExpandedId(expandedId === item.id ? null : item.id);
                         setVerifyingId(null);
+                        setDeletingId(null);
                       } else {
                         if (expandedId === item.id || verifyingId === item.id) {
                           setExpandedId(null);
                           setVerifyingId(null);
+                          setDeletingId(null);
                         } else {
                           setVerifyingId(item.id);
                           setVerifyError('');
                           setVerifyPassword('');
                           setVerifyEmail('');
+                          setDeletingId(null);
                         }
                       }
                     }}
@@ -154,7 +188,7 @@ export default function QAPage() {
                       <div style={{ display: 'flex', alignItems: 'center', gap: 8 }}>
                         {item.isPrivate && <span style={{ fontSize: '0.75rem', color: 'var(--color-text-muted)' }}>🔒</span>}
                         <span style={{ fontSize: '0.95rem', fontWeight: 600, color: 'var(--color-text-primary)' }}>
-                          {item.isPrivate ? '비공개 질문입니다' : item.title}
+                          {item.isPrivate && !item._verified ? '비공개 질문입니다' : item.title}
                         </span>
                       </div>
                     </div>
@@ -216,7 +250,7 @@ export default function QAPage() {
                         padding: '16px 20px', 
                         background: 'rgba(0,0,0,0.15)', 
                         borderRadius: 12, 
-                        marginBottom: item.answer ? 20 : 0, 
+                        marginBottom: item.answer ? 20 : 16, 
                         whiteSpace: 'pre-wrap', 
                         fontSize: '0.9375rem',
                         color: 'var(--color-text-secondary)',
@@ -225,6 +259,58 @@ export default function QAPage() {
                         <p style={{ fontWeight: 600, color: 'var(--color-text-primary)', marginBottom: 8, fontSize: '0.875rem' }}>질문 내용</p>
                         {item.content}
                       </div>
+
+                      <div style={{ display: 'flex', justifyContent: 'flex-end', gap: 12, marginBottom: item.answer ? 20 : 0 }}>
+                        {item.status !== 'answered' && (
+                          <Link href={`/qa/edit/${item.id}`} className="btn-secondary" style={{ padding: '6px 12px', fontSize: '0.75rem' }}>
+                            ✎ 수정
+                          </Link>
+                        )}
+                        <button 
+                          onClick={() => setDeletingId(item.id)} 
+                          className="btn-secondary" 
+                          style={{ padding: '6px 12px', fontSize: '0.75rem', color: '#fca5a5' }}
+                        >
+                          🗑 삭제
+                        </button>
+                      </div>
+
+                      {deletingId === item.id && (
+                        <div style={{ 
+                          padding: '16px', 
+                          background: 'rgba(239,68,68,0.05)', 
+                          borderRadius: 8, 
+                          marginBottom: 20,
+                          border: '1px solid rgba(239,68,68,0.1)'
+                        }}>
+                          <p style={{ fontSize: '0.85rem', color: '#fca5a5', marginBottom: 12 }}>질문을 삭제하시겠습니까? 비밀번호를 입력해주세요.</p>
+                          <div style={{ display: 'flex', gap: 8 }}>
+                            <input 
+                              type="password" 
+                              placeholder="비밀번호" 
+                              className="input-field" 
+                              style={{ flex: 1, padding: '8px 12px', fontSize: '0.85rem' }} 
+                              value={deletePassword}
+                              onChange={e => setDeletePassword(e.target.value)}
+                            />
+                            <button 
+                              onClick={() => handleDelete(item.id)} 
+                              className="btn-primary" 
+                              style={{ background: '#ef4444', padding: '8px 16px', fontSize: '0.85rem' }}
+                              disabled={isDeleting}
+                            >
+                              {isDeleting ? '삭제중...' : '삭제 확정'}
+                            </button>
+                            <button 
+                              onClick={() => { setDeletingId(null); setDeletePassword(''); }} 
+                              className="btn-secondary" 
+                              style={{ padding: '8px 16px', fontSize: '0.85rem' }}
+                            >
+                              취소
+                            </button>
+                          </div>
+                        </div>
+                      )}
                       
                       {item.answer && (
                         <div style={{ 

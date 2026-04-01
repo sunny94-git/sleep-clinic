@@ -62,14 +62,11 @@ export async function POST(request: NextRequest) {
       return NextResponse.json({ error: '필수 항목을 모두 입력해주세요.' }, { status: 400 });
     }
 
-    if (isPrivate && (!password || password.length < 4)) {
-      return NextResponse.json({ error: '비공개 질문은 4자리 이상 비밀번호가 필요합니다.' }, { status: 400 });
+    if (!password || password.length < 4) {
+      return NextResponse.json({ error: '비밀번호는 4자리 이상 입력해주세요.' }, { status: 400 });
     }
 
-    let passwordHash = null;
-    if (isPrivate) {
-      passwordHash = await hash(password, 10);
-    }
+    const passwordHash = await hash(password, 10);
 
     const item = await prisma.qAItem.create({
       data: {

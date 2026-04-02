@@ -3,6 +3,7 @@ import "./globals.css";
 import Header from "@/components/layout/Header";
 import Footer from "@/components/layout/Footer";
 import Providers from "@/components/layout/Providers";
+import AdminFloatingButton from "@/components/layout/AdminFloatingButton";
 
 export const metadata: Metadata = {
   title: {

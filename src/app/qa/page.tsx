@@ -147,72 +147,67 @@ export default function QAPage() {
               <p style={{ color: 'var(--color-text-muted)' }}>등록된 질문이 없습니다.</p>
             </div>
           ) : (
-            <div style={{ display: 'flex', flexDirection: 'column', gap: 12 }}>
-              {items.map(item => (
-                <div key={item.id} style={{ display: 'flex', flexDirection: 'column' }}>
-                  <div
-                    className="glass-card"
-                    style={{
-                      padding: '20px 24px',
-                      display: 'flex',
-                      alignItems: 'center',
-                      gap: 12,
-                      cursor: item.isPrivate ? 'default' : 'pointer',
-                      border: expandedId === item.id ? '1px solid var(--color-accent-light)' : undefined,
-                      transition: 'all 0.2s',
-                    }}
-                    onClick={() => {
-                      if (!item.isPrivate || item._verified) {
-                        setExpandedId(expandedId === item.id ? null : item.id);
-                        setVerifyingId(null);
-                        setDeletingId(null);
-                      } else {
-                        if (expandedId === item.id || verifyingId === item.id) {
-                          setExpandedId(null);
+              <div style={{ display: 'flex', flexDirection: 'column', gap: 16 }}>
+                {items.map(item => (
+                  <div key={item.id} style={{ display: 'flex', flexDirection: 'column' }}>
+                    <div
+                      className="glass-card responsive-list-item"
+                      style={{
+                        cursor: item.isPrivate ? 'default' : 'pointer',
+                        border: expandedId === item.id ? '1px solid var(--color-accent-light)' : undefined,
+                      }}
+                      onClick={() => {
+                        if (!item.isPrivate || item._verified) {
+                          setExpandedId(expandedId === item.id ? null : item.id);
                           setVerifyingId(null);
                           setDeletingId(null);
                         } else {
-                          setVerifyingId(item.id);
-                          setVerifyError('');
-                          setVerifyPassword('');
-                          setVerifyEmail('');
-                          setDeletingId(null);
+                          if (expandedId === item.id || verifyingId === item.id) {
+                            setExpandedId(null);
+                            setVerifyingId(null);
+                            setDeletingId(null);
+                          } else {
+                            setVerifyingId(item.id);
+                            setVerifyError('');
+                            setVerifyPassword('');
+                            setVerifyEmail('');
+                            setDeletingId(null);
+                          }
                         }
-                      }
-                    }}
-                  >
-                    <span className={`badge ${item.status === 'answered' ? 'badge-answered' : 'badge-pending'}`}>
-                      {QA_STATUS_LABELS[item.status as keyof typeof QA_STATUS_LABELS]}
-                    </span>
-                    <div style={{ flex: 1, minWidth: 0 }}>
-                      <div style={{ display: 'flex', alignItems: 'center', gap: 8 }}>
-                        {item.isPrivate && <span style={{ fontSize: '0.75rem', color: 'var(--color-text-muted)' }}>🔒</span>}
-                        <span style={{ fontSize: '0.95rem', fontWeight: 600, color: 'var(--color-text-primary)' }}>
-                          {item.isPrivate && !item._verified ? '비공개 질문입니다' : item.title}
+                      }}
+                    >
+                      <span className={`badge ${item.status === 'answered' ? 'badge-answered' : 'badge-pending'}`}>
+                        {QA_STATUS_LABELS[item.status as keyof typeof QA_STATUS_LABELS]}
+                      </span>
+                      <div style={{ flex: 1, minWidth: 0 }}>
+                        <div style={{ display: 'flex', alignItems: 'center', gap: 8 }}>
+                          {item.isPrivate && <span style={{ fontSize: '0.75rem', color: 'var(--color-text-muted)' }}>🔒</span>}
+                          <span className="title" style={{ fontSize: '0.95rem', fontWeight: 600, color: 'var(--color-text-primary)' }}>
+                            {item.isPrivate && !item._verified ? '비공개 질문입니다' : item.title}
+                          </span>
+                        </div>
+                      </div>
+                      <div className="meta-info" style={{ display: 'flex', gap: 16, fontSize: '0.8rem', color: 'var(--color-text-muted)', flexShrink: 0, alignItems: 'center' }}>
+                        <span className={`badge ${item.category === 'consultation' ? 'badge-sleep-info' : 'badge-free'}`} style={{ fontSize: '0.7rem' }}>
+                          {QA_CATEGORY_LABELS[item.category as keyof typeof QA_CATEGORY_LABELS]}
                         </span>
+                        <span>{new Date(item.createdAt).toLocaleDateString('ko-KR')}</span>
+                        {!item.isPrivate || item._verified ? (
+                          <span style={{ 
+                            display: 'inline-block', 
+                            transform: expandedId === item.id ? 'rotate(180deg)' : 'rotate(0deg)',
+                            transition: 'transform 0.2s',
+                            fontSize: '0.8rem'
+                          }}>▼</span>
+                        ) : (
+                          item.isPrivate && verifyingId !== item.id && (
+                             <span style={{ fontSize: '0.75rem', fontWeight: 600, color: 'var(--color-accent-light)' }}>
+                               인증필요
+                             </span>
+                          )
+                        )}
                       </div>
                     </div>
-                    <div style={{ display: 'flex', gap: 16, fontSize: '0.8rem', color: 'var(--color-text-muted)', flexShrink: 0, alignItems: 'center' }}>
-                      <span className={`badge ${item.category === 'consultation' ? 'badge-sleep-info' : 'badge-free'}`} style={{ fontSize: '0.7rem' }}>
-                        {QA_CATEGORY_LABELS[item.category as keyof typeof QA_CATEGORY_LABELS]}
-                      </span>
-                      <span>{new Date(item.createdAt).toLocaleDateString('ko-KR')}</span>
-                      {!item.isPrivate || item._verified ? (
-                        <span style={{ 
-                          display: 'inline-block', 
-                          transform: expandedId === item.id ? 'rotate(180deg)' : 'rotate(0deg)',
-                          transition: 'transform 0.2s',
-                          fontSize: '0.8rem'
-                        }}>▼</span>
-                      ) : (
-                        item.isPrivate && verifyingId !== item.id && (
-                           <span style={{ fontSize: '0.75rem', fontWeight: 600, color: 'var(--color-accent-light)' }}>
-                             인증필요
-                           </span>
-                        )
-                      )}
-                    </div>
-                  </div>
                   
                   {verifyingId === item.id && (
                     <div className="glass-card" style={{ marginTop: 8, padding: '24px', background: 'rgba(255,255,255,0.02)', borderTop: 'none' }}>

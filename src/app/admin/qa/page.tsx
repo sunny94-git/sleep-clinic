@@ -87,8 +87,12 @@ export default function AdminQAPage() {
         ) : (
           <div style={{ display: 'flex', flexDirection: 'column', gap: 12 }}>
             {items.map(item => (
-              <div key={item.id} className="glass-card" style={{ padding: 24 }}>
-                <div style={{ display: 'flex', alignItems: 'center', gap: 8, marginBottom: 12 }}>
+              <div key={item.id} className="glass-card responsive-list-item" style={{ 
+                flexDirection: 'column', 
+                alignItems: 'stretch',
+                padding: '24px'
+              }}>
+                <div className="meta-info" style={{ display: 'flex', alignItems: 'center', gap: 8, marginBottom: 12, flexWrap: 'wrap' }}>
                   <span className={`badge ${item.status === 'answered' ? 'badge-answered' : 'badge-pending'}`}>
                     {QA_STATUS_LABELS[item.status as keyof typeof QA_STATUS_LABELS]}
                   </span>
@@ -105,7 +109,7 @@ export default function AdminQAPage() {
                   </span>
                 </div>
 
-                <h3 style={{ fontSize: '1rem', fontWeight: 700, marginBottom: 8 }}>{item.title}</h3>
+                <h3 className="title" style={{ fontSize: '1rem', fontWeight: 700, marginBottom: 8 }}>{item.title}</h3>
                 <p style={{ fontSize: '0.9rem', color: 'var(--color-text-secondary)', marginBottom: 8, lineHeight: 1.7 }}>{item.content}</p>
                 <p style={{ fontSize: '0.8rem', color: 'var(--color-text-muted)', marginBottom: 16 }}>📧 {item.authorEmail}</p>
 

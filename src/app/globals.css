@@ -241,6 +241,43 @@
     border-color: var(--color-accent);
     color: white;
   }
+
+  /* Responsive List Card Styles */
+  .responsive-list-item {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    padding: 16px 24px;
+    transition: all 0.2s ease;
+  }
+
+  @media (max-width: 768px) {
+    .responsive-list-item {
+      flex-direction: column;
+      align-items: flex-start;
+      gap: 12px;
+      padding: 16px 16px;
+    }
+
+    .responsive-list-item .badge {
+      font-size: 0.7rem;
+      padding: 2px 8px;
+    }
+
+    .responsive-list-item h3, 
+    .responsive-list-item .title {
+      font-size: 0.9rem !important;
+      line-height: 1.5;
+    }
+
+    .responsive-list-item .meta-info {
+      width: 100%;
+      justify-content: space-between;
+      border-top: 1px solid rgba(255, 255, 255, 0.05);
+      padding-top: 10px;
+      font-size: 0.75rem !important;
+    }
+  }
 }
 
 @layer utilities {

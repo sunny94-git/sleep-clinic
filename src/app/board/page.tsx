@@ -93,25 +93,21 @@ export default function BoardPage() {
               <p style={{ color: 'var(--color-text-muted)', fontSize: '1rem' }}>게시글이 없습니다.</p>
             </div>
           ) : (
-            <div style={{ display: 'flex', flexDirection: 'column', gap: 8 }}>
+            <div style={{ display: 'flex', flexDirection: 'column', gap: 12 }}>
               {posts.map(post => (
                 <Link key={post.id} href={`/board/${post.id}`} style={{ textDecoration: 'none' }}>
-                  <div className="glass-card" style={{
-                    padding: '20px 24px',
-                    display: 'flex',
-                    alignItems: 'center',
-                    gap: 16,
+                  <div className="glass-card responsive-list-item" style={{
                     cursor: 'pointer',
                   }}>
                     <span className={badgeClass(post.category)}>
                       {POST_CATEGORY_LABELS[post.category as keyof typeof POST_CATEGORY_LABELS] || post.category}
                     </span>
                     <div style={{ flex: 1, minWidth: 0 }}>
-                      <div style={{ fontSize: '0.95rem', fontWeight: 600, color: 'var(--color-text-primary)' }}>
+                      <div className="title" style={{ fontSize: '0.95rem', fontWeight: 600, color: 'var(--color-text-primary)' }}>
                         {post.title}
                       </div>
                     </div>
-                    <div style={{ display: 'flex', gap: 20, fontSize: '0.8rem', color: 'var(--color-text-muted)', flexShrink: 0 }}>
+                    <div className="meta-info" style={{ display: 'flex', gap: 20, fontSize: '0.8rem', color: 'var(--color-text-muted)', flexShrink: 0 }}>
                       <span>{post.authorName}</span>
                       <span>👁 {post.viewCount}</span>
                       <span>{new Date(post.createdAt).toLocaleDateString('ko-KR')}</span>

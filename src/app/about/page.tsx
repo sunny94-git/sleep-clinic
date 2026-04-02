@@ -56,7 +56,7 @@ export default function AboutPage() {
               color: 'var(--color-text-secondary)', 
               fontSize: '1.05rem', 
               lineHeight: 2, 
-              maxWidth: 700, 
+              maxWidth: 850, 
               margin: '0 auto',
               wordBreak: 'keep-all' // Ensures natural breaks between words
             }}>

@@ -8,7 +8,7 @@ export const metadata: Metadata = {
 const INFO_ITEMS = [
   { icon: '📍', label: '주소', value: '광주광역시 남구 회재로 1140-23\n원광대학교 광주한방병원' },
   { icon: '📞', label: '대표전화', value: '062-670-6700' },
-  { icon: '📠', label: '팩스', value: '062-670-6499' },
+  { icon: '📠', label: '팩스', value: '062-670-6767' },
 ];
 
 const HOURS = [

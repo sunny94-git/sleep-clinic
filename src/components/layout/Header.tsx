@@ -3,7 +3,6 @@
 import Link from 'next/link';
 import { useState } from 'react';
 import { usePathname } from 'next/navigation';
-import { useSession, signOut } from 'next-auth/react';
 
 const NAV_ITEMS = [
   { href: '/', label: '홈' },
@@ -14,39 +13,6 @@ const NAV_ITEMS = [
   { href: '/qa', label: 'Q&A' },
   { href: '/contact', label: '오시는 길' },
 ];
-
-function AdminStatus() {
-  const { data: session, status } = useSession();
-  const isAdmin = status === 'authenticated' && (session as any)?.user?.role === 'admin';
-
-  if (status === 'loading') return <div style={{ width: 40 }} />;
-
-  if (isAdmin) {
-    return (
-      <div style={{ display: 'flex', alignItems: 'center', gap: 8, marginLeft: 12 }}>
-        <span style={{ 
-          fontSize: '0.7rem', fontWeight: 700, padding: '2px 8px', borderRadius: 4,
-          background: 'rgba(108, 92, 231, 0.2)', color: 'var(--color-accent-light)',
-          border: '1px solid rgba(108, 92, 231, 0.3)'
-        }}>관리자</span>
-        <button 
-          onClick={() => signOut({ callbackUrl: '/' })}
-          style={{
-            background: 'none', border: 'none', color: 'var(--color-text-muted)',
-            fontSize: '0.8rem', cursor: 'pointer', padding: '4px 8px'
-          }}
-        >로그아웃</button>
-      </div>
-    );
-  }
-
-  return (
-    <Link href="/admin/login" style={{
-      fontSize: '0.8rem', color: 'var(--color-text-muted)', textDecoration: 'none',
-      marginLeft: 12, padding: '4px 8px'
-    }}>관리자 로그인</Link>
-  );
-}
 
 export default function Header() {
   const [mobileOpen, setMobileOpen] = useState(false);
@@ -129,14 +95,10 @@ export default function Header() {
               {item.label}
             </Link>
           ))}
-          <AdminStatus />
         </nav>
 
-        {/* Mobile Toggle & Status */}
+        {/* Mobile Toggle */}
         <div style={{ display: 'flex', alignItems: 'center', gap: 12 }}>
-          <div className="mobile-only">
-             <AdminStatus />
-          </div>
           <button
             className="mobile-toggle"
             onClick={() => setMobileOpen(!mobileOpen)}
@@ -190,13 +152,12 @@ export default function Header() {
         @media (max-width: 768px) {
           .desktop-nav { display: none !important; }
           .mobile-toggle { display: block !important; }
-          .mobile-only { display: block !important; }
         }
         @media (min-width: 769px) {
           .mobile-nav { display: none !important; }
-          .mobile-only { display: none !important; }
         }
       `}</style>
     </header>
   );
 }
+

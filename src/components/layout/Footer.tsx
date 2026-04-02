@@ -1,4 +1,40 @@
+'use client';
+
 import Link from 'next/link';
+import { useSession, signOut } from 'next-auth/react';
+
+function AdminStatus() {
+  const { data: session, status } = useSession();
+  const isAdmin = status === 'authenticated' && (session as any)?.user?.role === 'admin';
+
+  if (status === 'loading') return <div style={{ width: 40 }} />;
+
+  if (isAdmin) {
+    return (
+      <div style={{ display: 'flex', alignItems: 'center', gap: 12 }}>
+        <span style={{ 
+          fontSize: '0.7rem', fontWeight: 700, padding: '2px 8px', borderRadius: 4,
+          background: 'rgba(108, 92, 231, 0.2)', color: 'var(--color-accent-light)',
+          border: '1px solid rgba(108, 92, 231, 0.3)'
+        }}>관리자</span>
+        <button 
+          onClick={() => signOut({ callbackUrl: '/' })}
+          style={{
+            background: 'none', border: 'none', color: 'var(--color-text-muted)',
+            fontSize: '0.75rem', cursor: 'pointer', padding: '4px 0',
+            textDecoration: 'underline'
+          }}
+        >로그아웃</button>
+      </div>
+    );
+  }
+
+  return (
+    <Link href="/admin/login" style={{
+      fontSize: '0.75rem', color: 'var(--color-text-muted)', textDecoration: 'none',
+    }}>관리자 로그인</Link>
+  );
+}
 
 export default function Footer() {
   return (
@@ -53,6 +89,7 @@ export default function Footer() {
             <div style={{ display: 'flex', flexDirection: 'column', gap: 10 }}>
               {[
                 { href: '/about', label: '클리닉 소개' },
+                { href: '/isi', label: '자가진단' },
                 { href: '/sleep-info', label: '수면정보' },
                 { href: '/board', label: '게시판' },
                 { href: '/qa', label: 'Q&A' },
@@ -96,13 +133,7 @@ export default function Footer() {
           color: 'var(--color-text-muted)',
         }}>
           <span>© {new Date().getFullYear()} 원광대학교 광주한방병원 수면장애클리닉. All rights reserved.</span>
-          <Link href="/admin/login" style={{
-            color: 'var(--color-text-muted)',
-            textDecoration: 'none',
-            fontSize: '0.75rem',
-          }}>
-            관리자
-          </Link>
+          <AdminStatus />
         </div>
       </div>
     </footer>

@@ -2,7 +2,7 @@ import type { Metadata } from 'next';
 
 export const metadata: Metadata = {
   title: '클리닉 소개',
-  description: '원광대학교 광주한방병원 수면장애클리닉 소개 — 진료 철학, 전문 분야, 치료 과정을 안내합니다.',
+  description: '원광대학교 광주한방병원 수면장애클리닉 소개 — 전문 분야, 치료 과정을 안내합니다.',
 };
 
 const TREATMENTS = [
@@ -52,7 +52,6 @@ export default function AboutPage() {
       <section style={{ padding: '80px 24px' }}>
         <div className="section-container">
           <div className="glass-card" style={{ padding: '48px 40px', textAlign: 'center' }}>
-            <h2 style={{ fontSize: '1.5rem', fontWeight: 700, marginBottom: 20 }}>진료 철학</h2>
             <p style={{ color: 'var(--color-text-secondary)', fontSize: '1.05rem', lineHeight: 2, maxWidth: 700, margin: '0 auto' }}>
               수면장애는 단순한 불편이 아닌, 삶의 질을 좌우하는 중요한 건강 문제입니다.<br />
               저희 클리닉은 한의학의 전인적 관점에서 환자 개개인의 체질과 생활 패턴을 고려한 맞춤 치료를 제공합니다.<br />

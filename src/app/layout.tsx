@@ -79,6 +79,7 @@ export default function RootLayout({
           <Header />
           <main style={{ minHeight: "calc(100vh - 72px)" }}>{children}</main>
           <Footer />
+          <AdminFloatingButton />
         </Providers>
       </body>
     </html>

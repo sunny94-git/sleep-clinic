@@ -54,7 +54,7 @@ export default function AboutPage() {
           <div className="glass-card" style={{ padding: '48px 40px', textAlign: 'center' }}>
             <p style={{ color: 'var(--color-text-secondary)', fontSize: '1.05rem', lineHeight: 2, maxWidth: 700, margin: '0 auto' }}>
               수면장애는 단순한 불편이 아닌, 삶의 질을 좌우하는 중요한 건강 문제입니다.<br />
-              저희 클리닉은 한의학의 전인적 관점에서 환자 개개인의 체질과 생활 패턴을 고려한 맞춤 치료를 제공합니다.<br />
+              수면장애 클리닉은 한의학의 전인적 관점에서 환자 개개인의 체질과 생활 패턴을 고려한 맞춤 치료를 제공합니다.<br />
               증상 완화를 넘어 근본 원인을 해결하여 지속 가능한 건강한 수면을 되찾을 수 있도록 돕겠습니다.
             </p>
           </div>

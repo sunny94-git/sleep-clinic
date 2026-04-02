@@ -8,6 +8,7 @@ import { useSession, signOut } from 'next-auth/react';
 const NAV_ITEMS = [
   { href: '/', label: '홈' },
   { href: '/about', label: '소개' },
+  { href: '/isi', label: '자가진단' },
   { href: '/sleep-info', label: '수면정보' },
   { href: '/board', label: '게시판' },
   { href: '/qa', label: 'Q&A' },

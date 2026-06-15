@@ -28,8 +28,8 @@ export default function AdminDashboard() {
   }, []);
 
   const cards = [
-    { label: '전체 게시글', value: stats.totalPosts, icon: '📝', color: '#6c5ce7', href: '/admin/posts' },
-    { label: '전체 Q&A', value: stats.totalQA, icon: '❓', color: '#2d5a8e', href: '/admin/qa' },
+    { label: '전체 게시글', value: stats.totalPosts, icon: '📝', color: '#2C5F7C', href: '/admin/posts' },
+    { label: '전체 Q&A', value: stats.totalQA, icon: '❓', color: '#3A7CA5', href: '/admin/qa' },
     { label: '답변 대기', value: stats.pendingQA, icon: '⏳', color: '#f59e0b', href: '/admin/qa' },
   ];
 
@@ -39,7 +39,7 @@ export default function AdminDashboard() {
         <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: 40 }}>
           <div>
             <h1 style={{ fontSize: '1.75rem', fontWeight: 800, marginBottom: 4 }}>
-              <span className="gradient-text">관리자 대시보드</span>
+              <span style={{ color: 'var(--color-primary)' }}>관리자 대시보드</span>
             </h1>
             <p style={{ color: 'var(--color-text-muted)', fontSize: '0.9rem' }}>수면장애클리닉 CMS</p>
           </div>

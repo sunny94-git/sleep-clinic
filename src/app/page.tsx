@@ -17,7 +17,7 @@ export default function HomePage() {
         overflow: 'hidden',
         padding: '100px 24px 80px',
         textAlign: 'center',
-        background: 'linear-gradient(180deg, var(--color-surface) 0%, var(--color-primary-dark) 100%)',
+        background: 'linear-gradient(180deg, var(--color-surface) 0%, #E8E2DA 100%)',
       }}>
         {/* Background decoration */}
         <div style={{
@@ -25,7 +25,7 @@ export default function HomePage() {
           top: '10%', right: '10%',
           width: 300, height: 300,
           borderRadius: '50%',
-          background: 'radial-gradient(circle, rgba(108,92,231,0.15) 0%, transparent 70%)',
+          background: 'radial-gradient(circle, rgba(44,95,124,0.1) 0%, transparent 70%)',
           filter: 'blur(60px)',
           pointerEvents: 'none',
         }} />
@@ -34,7 +34,7 @@ export default function HomePage() {
           bottom: '20%', left: '5%',
           width: 250, height: 250,
           borderRadius: '50%',
-          background: 'radial-gradient(circle, rgba(45,90,142,0.2) 0%, transparent 70%)',
+          background: 'radial-gradient(circle, rgba(212,134,78,0.12) 0%, transparent 70%)',
           filter: 'blur(50px)',
           pointerEvents: 'none',
         }} />
@@ -46,11 +46,11 @@ export default function HomePage() {
             gap: 8,
             padding: '8px 20px',
             borderRadius: 20,
-            background: 'rgba(108, 92, 231, 0.1)',
-            border: '1px solid rgba(108, 92, 231, 0.2)',
+            background: 'rgba(44, 95, 124, 0.08)',
+            border: '1px solid rgba(44, 95, 124, 0.15)',
             marginBottom: 24,
             fontSize: '0.875rem',
-            color: 'var(--color-accent-light)',
+            color: 'var(--color-primary)',
           }}>
             🌙 원광대학교 광주한방병원
           </div>
@@ -61,7 +61,7 @@ export default function HomePage() {
             lineHeight: 1.2,
             marginBottom: 20,
           }}>
-            <span className="gradient-text">편안한 잠</span>이<br />
+            <span style={{ color: 'var(--color-primary)' }}>편안한 잠</span>이<br />
             건강한 삶의 시작입니다
           </h1>
 
@@ -92,7 +92,7 @@ export default function HomePage() {
         <div className="section-container">
           <div style={{ textAlign: 'center', marginBottom: 48 }}>
             <h2 style={{ fontSize: '1.875rem', fontWeight: 700, marginBottom: 12 }}>
-              전문 <span className="gradient-text">진료 분야</span>
+              전문 <span style={{ color: 'var(--color-primary)' }}>진료 분야</span>
             </h2>
             <p style={{ color: 'var(--color-text-secondary)' }}>
               다양한 수면장애에 대한 체계적인 한방치료를 제공합니다
@@ -113,7 +113,7 @@ export default function HomePage() {
                   width: 52,
                   height: 52,
                   borderRadius: 14,
-                  background: 'rgba(108, 92, 231, 0.1)',
+                  background: 'rgba(44, 95, 124, 0.08)',
                   display: 'flex',
                   alignItems: 'center',
                   justifyContent: 'center',
@@ -135,7 +135,7 @@ export default function HomePage() {
       {/* CTA Section */}
       <section style={{
         padding: '60px 24px',
-        background: 'linear-gradient(135deg, rgba(108,92,231,0.1), rgba(45,90,142,0.1))',
+        background: 'linear-gradient(135deg, rgba(44,95,124,0.06), rgba(212,134,78,0.06))',
         borderTop: '1px solid var(--color-border)',
         borderBottom: '1px solid var(--color-border)',
       }}>
@@ -161,3 +161,4 @@ export default function HomePage() {
     </div>
   );
 }
+

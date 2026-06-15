@@ -79,7 +79,7 @@ export default function EditQuestionPage({ params }: { params: Promise<{ id: str
       <section style={{ padding: '80px 24px 40px' }}>
         <div className="section-container" style={{ maxWidth: 700 }}>
           <h1 style={{ fontSize: '1.75rem', fontWeight: 800, marginBottom: 8 }}>
-            <span className="gradient-text">질문 수정하기</span>
+            <span style={{ color: 'var(--color-primary)' }}>질문 수정하기</span>
           </h1>
           <p style={{ color: 'var(--color-text-muted)', marginBottom: 32, fontSize: '0.9rem' }}>
             기존에 작성한 내용을 수정합니다.
@@ -88,7 +88,7 @@ export default function EditQuestionPage({ params }: { params: Promise<{ id: str
           {error && (
             <div style={{
               padding: '14px 20px', borderRadius: 10, marginBottom: 24,
-              background: 'rgba(239,68,68,0.1)', border: '1px solid rgba(239,68,68,0.2)',
+              background: 'rgba(192, 57, 43, 0.1)', border: '1px solid rgba(192, 57, 43, 0.15)',
               color: '#fca5a5', fontSize: '0.9rem',
             }}>
               {error}

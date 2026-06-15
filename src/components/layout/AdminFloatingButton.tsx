@@ -33,7 +33,7 @@ export default function AdminFloatingButton() {
         borderRadius: '30px',
         fontWeight: 700,
         fontSize: '0.95rem',
-        boxShadow: '0 10px 25px rgba(108, 92, 231, 0.4)',
+        boxShadow: '0 10px 25px rgba(44, 95, 124, 0.3)',
         transition: 'all 0.3s ease',
         backdropFilter: 'blur(10px)',
         border: '1px solid rgba(255, 255, 255, 0.1)',
@@ -47,7 +47,7 @@ export default function AdminFloatingButton() {
       <style jsx>{`
         .admin-fab:hover {
           transform: translateY(-5px) scale(1.02);
-          box-shadow: 0 15px 35px rgba(108, 92, 231, 0.5);
+          box-shadow: 0 15px 35px rgba(44, 95, 124, 0.35);
           filter: brightness(1.1);
         }
         @keyframes slideUp {

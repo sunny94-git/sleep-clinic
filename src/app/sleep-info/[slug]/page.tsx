@@ -197,7 +197,7 @@ export default async function SleepInfoDetailPage({ params }: { params: Promise<
 
   return (
     <div>
-      <section style={{ padding: '80px 24px 0', background: 'linear-gradient(180deg, var(--color-surface) 0%, var(--color-primary-dark) 100%)' }}>
+      <section style={{ padding: '80px 24px 0', background: 'var(--color-surface)' }}>
         <div className="section-container" style={{ maxWidth: 800 }}>
           <Link href="/sleep-info" style={{ color: 'var(--color-text-muted)', textDecoration: 'none', fontSize: '0.9rem', display: 'inline-flex', alignItems: 'center', gap: 6, marginBottom: 24 }}>
             ← 수면정보 목록
@@ -208,7 +208,7 @@ export default async function SleepInfoDetailPage({ params }: { params: Promise<
       <section style={{ padding: '0 24px 80px' }}>
         <div className="section-container" style={{ maxWidth: 800 }}>
           <div className="glass-card" style={{ padding: 'clamp(28px, 5vw, 48px) clamp(24px, 4vw, 44px)' }}>
-            <div style={{ width: 64, height: 64, borderRadius: 16, background: 'rgba(108,92,231,0.1)', display: 'flex', alignItems: 'center', justifyContent: 'center', fontSize: '2rem', marginBottom: 24 }}>
+            <div style={{ width: 64, height: 64, borderRadius: 16, background: 'rgba(44, 95, 124, 0.08)', display: 'flex', alignItems: 'center', justifyContent: 'center', fontSize: '2rem', marginBottom: 24 }}>
               {article.icon}
             </div>
             <h1 style={{ fontSize: 'clamp(1.5rem, 3vw, 2rem)', fontWeight: 800, marginBottom: 32, lineHeight: 1.4 }}>
@@ -216,7 +216,7 @@ export default async function SleepInfoDetailPage({ params }: { params: Promise<
             </h1>
             <div style={{ fontSize: '0.95rem', lineHeight: 1.9, color: 'var(--color-text-secondary)' }} dangerouslySetInnerHTML={{ __html: renderContent(article.content) }} />
 
-            <div style={{ marginTop: 48, padding: '28px 24px', borderRadius: 14, background: 'rgba(108,92,231,0.06)', border: '1px solid rgba(108,92,231,0.15)', textAlign: 'center' }}>
+            <div style={{ marginTop: 48, padding: '28px 24px', borderRadius: 14, background: 'rgba(44, 95, 124, 0.05)', border: '1px solid rgba(44, 95, 124, 0.1)', textAlign: 'center' }}>
               <p style={{ fontSize: '1rem', fontWeight: 600, marginBottom: 8 }}>수면 문제로 고민이신가요?</p>
               <p style={{ fontSize: '0.875rem', color: 'var(--color-text-muted)', marginBottom: 20 }}>전문의에게 직접 상담 받아보세요</p>
               <Link href="/qa/ask" className="btn-primary" style={{ fontSize: '0.9rem', padding: '12px 28px' }}>무료 상담하기</Link>

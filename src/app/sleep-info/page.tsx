@@ -51,11 +51,11 @@ export default function SleepInfoPage() {
       <section style={{
         padding: '80px 24px 40px',
         textAlign: 'center',
-        background: 'linear-gradient(180deg, var(--color-surface) 0%, var(--color-primary-dark) 100%)',
+        background: 'var(--color-surface)',
       }}>
         <div className="section-container">
           <h1 style={{ fontSize: 'clamp(2rem, 4vw, 2.75rem)', fontWeight: 800, marginBottom: 12 }}>
-            <span className="gradient-text">수면정보</span>
+            <span style={{ color: 'var(--color-primary)' }}>수면정보</span>
           </h1>
           <p style={{ color: 'var(--color-text-secondary)' }}>
             수면장애에 대한 전문 정보와 한방치료법을 알아보세요
@@ -75,7 +75,7 @@ export default function SleepInfoPage() {
                 <div className="glass-card" style={{ padding: 28, height: '100%', cursor: 'pointer' }}>
                   <div style={{
                     width: 56, height: 56, borderRadius: 14,
-                    background: 'rgba(108,92,231,0.1)',
+                    background: 'rgba(44, 95, 124, 0.08)',
                     display: 'flex', alignItems: 'center', justifyContent: 'center',
                     fontSize: '1.5rem', marginBottom: 16,
                   }}>

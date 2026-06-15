@@ -42,7 +42,7 @@ export default function AdminLoginPage() {
         <div style={{ textAlign: 'center', marginBottom: 32 }}>
           <div style={{
             width: 56, height: 56, borderRadius: 16,
-            background: 'linear-gradient(135deg, #6c5ce7, #2d5a8e)',
+            background: 'linear-gradient(135deg, #2C5F7C, #3A7CA5)',
             display: 'flex', alignItems: 'center', justifyContent: 'center',
             fontSize: '1.5rem', margin: '0 auto 16px',
           }}>
@@ -57,7 +57,7 @@ export default function AdminLoginPage() {
         {error && (
           <div style={{
             padding: '12px 16px', borderRadius: 10, marginBottom: 20,
-            background: 'rgba(239,68,68,0.1)', border: '1px solid rgba(239,68,68,0.2)',
+            background: 'rgba(192, 57, 43, 0.1)', border: '1px solid rgba(192, 57, 43, 0.2)',
             color: '#fca5a5', fontSize: '0.875rem', textAlign: 'center',
           }}>
             {error}

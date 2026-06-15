@@ -30,11 +30,11 @@ export default function ContactPage() {
       <section style={{
         padding: '80px 24px 60px',
         textAlign: 'center',
-        background: 'linear-gradient(180deg, var(--color-surface) 0%, var(--color-primary-dark) 100%)',
+        background: 'var(--color-surface)',
       }}>
         <div className="section-container">
           <h1 style={{ fontSize: 'clamp(2rem, 4vw, 2.75rem)', fontWeight: 800, marginBottom: 16 }}>
-            <span className="gradient-text">오시는 길</span>
+            <span style={{ color: 'var(--color-primary)' }}>오시는 길</span>
           </h1>
           <p style={{ color: 'var(--color-text-secondary)', fontSize: '1.1rem' }}>
             원광대학교 광주한방병원 수면장애클리닉
@@ -74,7 +74,7 @@ export default function ContactPage() {
                   <div key={i} style={{ display: 'flex', gap: 14, alignItems: 'flex-start' }}>
                     <div style={{
                       width: 40, height: 40, borderRadius: 10,
-                      background: 'rgba(108,92,231,0.1)',
+                      background: 'rgba(44, 95, 124, 0.08)',
                       display: 'flex', alignItems: 'center', justifyContent: 'center',
                       flexShrink: 0,
                     }}>
@@ -97,7 +97,7 @@ export default function ContactPage() {
                   <div key={i} style={{
                     display: 'flex', justifyContent: 'space-between', alignItems: 'center',
                     padding: '12px 16px', borderRadius: 10,
-                    background: h.time === '휴진' ? 'rgba(239,68,68,0.05)' : 'rgba(108,92,231,0.05)',
+                    background: h.time === '휴진' ? 'rgba(192, 57, 43, 0.05)' : 'rgba(44, 95, 124, 0.04)',
                   }}>
                     <span style={{ fontSize: '0.9rem', fontWeight: 500 }}>{h.day}</span>
                     <span style={{
@@ -117,7 +117,7 @@ export default function ContactPage() {
                   <div key={i} style={{ display: 'flex', gap: 14, alignItems: 'flex-start' }}>
                     <div style={{
                       width: 40, height: 40, borderRadius: 10,
-                      background: 'rgba(108,92,231,0.1)',
+                      background: 'rgba(44, 95, 124, 0.08)',
                       display: 'flex', alignItems: 'center', justifyContent: 'center',
                       flexShrink: 0,
                     }}>

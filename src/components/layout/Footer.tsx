@@ -14,8 +14,8 @@ function AdminStatus() {
       <div style={{ display: 'flex', alignItems: 'center', gap: 12 }}>
         <span style={{ 
           fontSize: '0.7rem', fontWeight: 700, padding: '2px 8px', borderRadius: 4,
-          background: 'rgba(108, 92, 231, 0.2)', color: 'var(--color-accent-light)',
-          border: '1px solid rgba(108, 92, 231, 0.3)'
+          background: 'rgba(44, 95, 124, 0.1)', color: 'var(--color-primary)',
+          border: '1px solid rgba(44, 95, 124, 0.2)'
         }}>관리자</span>
         <button 
           onClick={() => signOut({ callbackUrl: '/' })}
@@ -62,7 +62,7 @@ export default function Footer() {
                 width: 36,
                 height: 36,
                 borderRadius: 10,
-                background: 'linear-gradient(135deg, #6c5ce7, #2d5a8e)',
+                background: 'linear-gradient(135deg, #2C5F7C, #3A7CA5)',
                 display: 'flex',
                 alignItems: 'center',
                 justifyContent: 'center',

@@ -107,7 +107,7 @@ export async function sendAdminNotification(
           </div>
 
           <div style="text-align: center; margin: 32px 0;">
-            <a href="https://sleep-clinic.vercel.app/" style="display: inline-block; background-color: #6c5ce7; color: #ffffff; text-decoration: none; padding: 14px 32px; border-radius: 8px; font-weight: bold; font-size: 16px; transition: background-color 0.2s;">
+            <a href="https://sleep-clinic.vercel.app/" style="display: inline-block; background-color: #2C5F7C; color: #ffffff; text-decoration: none; padding: 14px 32px; border-radius: 8px; font-weight: bold; font-size: 16px; transition: background-color 0.2s;">
               홈페이지 바로가기
             </a>
           </div>

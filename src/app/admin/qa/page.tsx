@@ -79,7 +79,7 @@ export default function AdminQAPage() {
     <div style={{ padding: '40px 24px 80px' }}>
       <div className="section-container">
         <h1 style={{ fontSize: '1.5rem', fontWeight: 800, marginBottom: 32 }}>
-          <span className="gradient-text">Q&A 관리</span>
+          <span style={{ color: 'var(--color-primary)' }}>Q&A 관리</span>
         </h1>
 
         {loading ? (
@@ -136,9 +136,9 @@ export default function AdminQAPage() {
                   <button 
                     onClick={() => handleTogglePrivacy(item.id, item.isPrivate)}
                     style={{
-                      background: item.isPrivate ? 'rgba(156,163,175,0.1)' : 'rgba(108,92,231,0.1)',
-                      border: `1px solid ${item.isPrivate ? 'rgba(156,163,175,0.2)' : 'rgba(108,92,231,0.2)'}`,
-                      color: item.isPrivate ? '#9ca3af' : 'var(--color-accent-light)',
+                      background: item.isPrivate ? 'rgba(156,163,175,0.1)' : 'rgba(44, 95, 124, 0.08)',
+                      border: `1px solid ${item.isPrivate ? 'rgba(156,163,175,0.2)' : 'rgba(44, 95, 124, 0.15)'}`,
+                      color: item.isPrivate ? '#9ca3af' : 'var(--color-primary)',
                       padding: '8px 20px', borderRadius: 8,
                       cursor: 'pointer', fontSize: '0.85rem', fontWeight: 600,
                     }}
@@ -148,7 +148,7 @@ export default function AdminQAPage() {
                   <button 
                     onClick={() => handleDelete(item.id)}
                     style={{
-                      background: 'rgba(239,68,68,0.1)', border: '1px solid rgba(239,68,68,0.2)',
+                      background: 'rgba(192, 57, 43, 0.1)', border: '1px solid rgba(192, 57, 43, 0.2)',
                       color: '#fca5a5', padding: '8px 20px', borderRadius: 8,
                       cursor: 'pointer', fontSize: '0.85rem', fontWeight: 600,
                     }}

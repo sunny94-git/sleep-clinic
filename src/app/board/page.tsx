@@ -53,11 +53,11 @@ export default function BoardPage() {
       <section style={{
         padding: '80px 24px 40px',
         textAlign: 'center',
-        background: 'linear-gradient(180deg, var(--color-surface) 0%, var(--color-primary-dark) 100%)',
+        background: 'var(--color-surface)',
       }}>
         <div className="section-container">
           <h1 style={{ fontSize: 'clamp(2rem, 4vw, 2.75rem)', fontWeight: 800, marginBottom: 12 }}>
-            <span className="gradient-text">게시판</span>
+            <span style={{ color: 'var(--color-primary)' }}>게시판</span>
           </h1>
           <p style={{ color: 'var(--color-text-secondary)' }}>공지사항, 자유게시판, 수면정보를 확인하세요</p>
         </div>

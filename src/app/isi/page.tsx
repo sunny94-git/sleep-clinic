@@ -134,7 +134,7 @@ export default function ISIPage() {
   return (
     <div className="section-container" style={{ padding: '80px 24px' }}>
       <div className="page-header">
-        <h1 className="gradient-text">불면증 자가진단 (ISI)</h1>
+        <h1 style={{ color: 'var(--color-primary)' }}>불면증 자가진단 (ISI)</h1>
         <p>간단한 자가진단을 통해 수면 건강 상태를 확인해보세요.</p>
       </div>
 
@@ -167,7 +167,7 @@ export default function ISIPage() {
                 style={{
                   padding: '20px 24px',
                   textAlign: 'left',
-                  background: answers[currentStep] === index ? 'rgba(108, 92, 231, 0.15)' : 'rgba(255, 255, 255, 0.03)',
+                  background: answers[currentStep] === index ? 'rgba(44, 95, 124, 0.1)' : 'rgba(255, 255, 255, 0.03)',
                   border: `1px solid ${answers[currentStep] === index ? 'var(--color-accent)' : 'var(--color-border)'}`,
                   borderRadius: 14,
                   color: answers[currentStep] === index ? 'white' : 'var(--color-text-secondary)',
@@ -206,7 +206,7 @@ export default function ISIPage() {
 
       <style jsx>{`
         button:hover {
-          background: rgba(108, 92, 231, 0.08) !important;
+          background: rgba(44, 95, 124, 0.06) !important;
           border-color: var(--color-accent-light) !important;
           color: white !important;
           transform: translateX(4px);

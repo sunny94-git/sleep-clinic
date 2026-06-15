@@ -27,19 +27,19 @@ export default function AboutPage() {
       <section style={{
         padding: '80px 24px 60px',
         textAlign: 'center',
-        background: 'linear-gradient(180deg, var(--color-surface) 0%, var(--color-primary-dark) 100%)',
+        background: 'var(--color-surface)',
         position: 'relative',
         overflow: 'hidden',
       }}>
         <div style={{
           position: 'absolute', top: '20%', left: '50%', transform: 'translateX(-50%)',
           width: 500, height: 500, borderRadius: '50%',
-          background: 'radial-gradient(circle, rgba(108,92,231,0.08) 0%, transparent 70%)',
+          background: 'radial-gradient(circle, rgba(44, 95, 124, 0.06) 0%, transparent 70%)',
           pointerEvents: 'none',
         }} />
         <div className="section-container" style={{ position: 'relative' }}>
           <h1 style={{ fontSize: 'clamp(2rem, 4vw, 2.75rem)', fontWeight: 800, marginBottom: 16 }}>
-            <span className="gradient-text">클리닉 소개</span>
+            <span style={{ color: 'var(--color-primary)' }}>클리닉 소개</span>
           </h1>
           <p style={{ color: 'var(--color-text-secondary)', fontSize: '1.1rem', maxWidth: 600, margin: '0 auto', lineHeight: 1.8 }}>
             원광대학교 광주한방병원 수면장애클리닉은<br />
@@ -72,7 +72,7 @@ export default function AboutPage() {
       <section style={{ padding: '0 24px 80px' }}>
         <div className="section-container">
           <h2 style={{ fontSize: '1.75rem', fontWeight: 700, textAlign: 'center', marginBottom: 40 }}>
-            <span className="gradient-text">치료 방법</span>
+            <span style={{ color: 'var(--color-primary)' }}>치료 방법</span>
           </h2>
           <div style={{
             display: 'grid',
@@ -84,7 +84,7 @@ export default function AboutPage() {
                 <div style={{
                   fontSize: '2rem', marginBottom: 12,
                   width: 56, height: 56, borderRadius: 14,
-                  background: 'rgba(108,92,231,0.1)',
+                  background: 'rgba(44, 95, 124, 0.08)',
                   display: 'flex', alignItems: 'center', justifyContent: 'center',
                 }}>
                   {t.icon}
@@ -100,13 +100,13 @@ export default function AboutPage() {
       {/* Process */}
       <section style={{
         padding: '80px 24px',
-        background: 'linear-gradient(135deg, rgba(108,92,231,0.05), rgba(45,90,142,0.05))',
+        background: 'linear-gradient(135deg, rgba(44, 95, 124, 0.04), rgba(58, 124, 165, 0.04))',
         borderTop: '1px solid var(--color-border)',
         borderBottom: '1px solid var(--color-border)',
       }}>
         <div className="section-container">
           <h2 style={{ fontSize: '1.75rem', fontWeight: 700, textAlign: 'center', marginBottom: 48 }}>
-            <span className="gradient-text">진료 과정</span>
+            <span style={{ color: 'var(--color-primary)' }}>진료 과정</span>
           </h2>
           <div style={{
             display: 'grid',

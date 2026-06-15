@@ -111,11 +111,11 @@ export default function QAPage() {
       <section style={{
         padding: '80px 24px 40px',
         textAlign: 'center',
-        background: 'linear-gradient(180deg, var(--color-surface) 0%, var(--color-primary-dark) 100%)',
+        background: 'var(--color-surface)',
       }}>
         <div className="section-container">
           <h1 style={{ fontSize: 'clamp(2rem, 4vw, 2.75rem)', fontWeight: 800, marginBottom: 12 }}>
-            <span className="gradient-text">Q&A 상담</span>
+            <span style={{ color: 'var(--color-primary)' }}>Q&A 상담</span>
           </h1>
           <p style={{ color: 'var(--color-text-secondary)' }}>궁금한 점을 질문하시면 전문의가 답변해드립니다</p>
         </div>
@@ -216,7 +216,7 @@ export default function QAPage() {
                            비공개 질문을 열람하려면 작성 시 입력한 이메일과 비밀번호를 입력해주세요.
                          </p>
                          {verifyError && (
-                           <p style={{ color: '#fca5a5', fontSize: '0.85rem', marginBottom: 16, background: 'rgba(239,68,68,0.1)', padding: '8px 12px', borderRadius: 6 }}>
+                           <p style={{ color: '#fca5a5', fontSize: '0.85rem', marginBottom: 16, background: 'rgba(192, 57, 43, 0.1)', padding: '8px 12px', borderRadius: 6 }}>
                              {verifyError}
                            </p>
                          )}
@@ -273,10 +273,10 @@ export default function QAPage() {
                       {deletingId === item.id && (
                         <div style={{ 
                           padding: '16px', 
-                          background: 'rgba(239,68,68,0.05)', 
+                          background: 'rgba(192, 57, 43, 0.05)', 
                           borderRadius: 8, 
                           marginBottom: 20,
-                          border: '1px solid rgba(239,68,68,0.1)'
+                          border: '1px solid rgba(192, 57, 43, 0.1)'
                         }}>
                           <p style={{ fontSize: '0.85rem', color: '#fca5a5', marginBottom: 12 }}>질문을 삭제하시겠습니까? 비밀번호를 입력해주세요.</p>
                           <div style={{ display: 'flex', gap: 8 }}>
@@ -310,7 +310,7 @@ export default function QAPage() {
                       {item.answer && (
                         <div style={{ 
                           padding: '20px', 
-                          background: 'rgba(108,92,231,0.08)', 
+                          background: 'rgba(44, 95, 124, 0.06)', 
                           borderRadius: 12, 
                           borderLeft: '4px solid var(--color-accent-light)' 
                         }}>

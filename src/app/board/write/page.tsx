@@ -76,7 +76,7 @@ export default function WritePostPage() {
       <section style={{ padding: '80px 24px 40px' }}>
         <div className="section-container" style={{ maxWidth: 700 }}>
           <h1 style={{ fontSize: '1.75rem', fontWeight: 800, marginBottom: 8 }}>
-            <span className="gradient-text">글쓰기</span>
+            <span style={{ color: 'var(--color-primary)' }}>글쓰기</span>
           </h1>
           <p style={{ color: 'var(--color-text-muted)', marginBottom: 32, fontSize: '0.9rem' }}>
             게시판에 새 글을 작성합니다.
@@ -85,7 +85,7 @@ export default function WritePostPage() {
           {error && (
             <div style={{
               padding: '14px 20px', borderRadius: 10, marginBottom: 24,
-              background: 'rgba(239,68,68,0.1)', border: '1px solid rgba(239,68,68,0.2)',
+              background: 'rgba(192, 57, 43, 0.1)', border: '1px solid rgba(192, 57, 43, 0.2)',
               color: '#fca5a5', fontSize: '0.9rem',
             }}>
               {error}

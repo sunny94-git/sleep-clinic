@@ -53,7 +53,7 @@ export default function AdminPostsPage() {
     <div style={{ padding: '40px 24px 80px' }}>
       <div className="section-container">
         <h1 style={{ fontSize: '1.5rem', fontWeight: 800, marginBottom: 32 }}>
-          <span className="gradient-text">게시글 관리</span>
+          <span style={{ color: 'var(--color-primary)' }}>게시글 관리</span>
         </h1>
 
         {loading ? (
@@ -78,9 +78,9 @@ export default function AdminPostsPage() {
                   <button
                     onClick={() => handleTogglePublish(post.id, post.isPublished)}
                     style={{
-                      background: post.isPublished ? 'rgba(108,92,231,0.1)' : 'rgba(156,163,175,0.1)',
-                      border: `1px solid ${post.isPublished ? 'rgba(108,92,231,0.2)' : 'rgba(156,163,175,0.2)'}`,
-                      color: post.isPublished ? 'var(--color-accent-light)' : '#9ca3af',
+                      background: post.isPublished ? 'rgba(44, 95, 124, 0.08)' : 'rgba(156,163,175,0.1)',
+                      border: `1px solid ${post.isPublished ? 'rgba(44, 95, 124, 0.15)' : 'rgba(156,163,175,0.2)'}`,
+                      color: post.isPublished ? 'var(--color-primary)' : '#9ca3af',
                       padding: '6px 14px', borderRadius: 8,
                       cursor: 'pointer', fontSize: '0.8rem', fontWeight: 600,
                       minWidth: 70,
@@ -91,7 +91,7 @@ export default function AdminPostsPage() {
                   <button
                     onClick={() => handleDelete(post.id)}
                     style={{
-                      background: 'rgba(239,68,68,0.1)', border: '1px solid rgba(239,68,68,0.2)',
+                      background: 'rgba(192, 57, 43, 0.1)', border: '1px solid rgba(192, 57, 43, 0.2)',
                       color: '#fca5a5', padding: '6px 14px', borderRadius: 8,
                       cursor: 'pointer', fontSize: '0.8rem', fontWeight: 600,
                     }}

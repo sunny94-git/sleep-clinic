@@ -23,7 +23,7 @@ export default function Header() {
       position: 'sticky', 
       top: 0, 
       zIndex: 100, 
-      background: 'rgba(15, 23, 42, 0.85)', 
+      background: 'rgba(255, 255, 255, 0.92)', 
       backdropFilter: 'blur(20px)', 
       WebkitBackdropFilter: 'blur(20px)',
       borderBottom: '1px solid var(--color-border)',
@@ -48,7 +48,7 @@ export default function Header() {
             width: 40,
             height: 40,
             borderRadius: 12,
-            background: 'linear-gradient(135deg, #6c5ce7, #2d5a8e)',
+            background: 'linear-gradient(135deg, #2C5F7C, #3A7CA5)',
             display: 'flex',
             alignItems: 'center',
             justifyContent: 'center',
@@ -86,10 +86,10 @@ export default function Header() {
                 borderRadius: 8,
                 fontSize: '0.9rem',
                 fontWeight: pathname === item.href ? 600 : 400,
-                color: pathname === item.href ? 'var(--color-accent-light)' : 'var(--color-text-secondary)',
+                color: pathname === item.href ? 'var(--color-primary)' : 'var(--color-text-secondary)',
                 textDecoration: 'none',
                 transition: 'all 0.2s ease',
-                background: pathname === item.href ? 'rgba(108, 92, 231, 0.1)' : 'transparent',
+                background: pathname === item.href ? 'rgba(44, 95, 124, 0.08)' : 'transparent',
               }}
             >
               {item.label}
@@ -137,9 +137,9 @@ export default function Header() {
                 borderRadius: 10,
                 fontSize: '0.95rem',
                 fontWeight: pathname === item.href ? 600 : 400,
-                color: pathname === item.href ? 'var(--color-accent-light)' : 'var(--color-text-secondary)',
+                color: pathname === item.href ? 'var(--color-primary)' : 'var(--color-text-secondary)',
                 textDecoration: 'none',
-                background: pathname === item.href ? 'rgba(108, 92, 231, 0.1)' : 'transparent',
+                background: pathname === item.href ? 'rgba(44, 95, 124, 0.08)' : 'transparent',
               }}
             >
               {item.label}

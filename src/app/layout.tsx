@@ -61,13 +61,12 @@ export default function RootLayout({
                 "불면증, 수면무호흡, 하지불안증후군 등 수면장애 전문 한방치료",
               address: {
                 "@type": "PostalAddress",
+                addressRegion: "광주광역시",
+                addressLocality: "남구",
                 streetAddress: "회재로 1140-23",
-                addressLocality: "광주광역시",
-                addressRegion: "남구",
-                postalCode: "61729",
-                addressCountry: "KR",
+                addressCountry: "KR"
               },
-              telephone: "062-670-6700",
+              telephone: "062-670-6412",
               openingHours: ["Mo-Fr 09:00-17:30", "Sa 09:00-12:30"],
               medicalSpecialty: "Sleep Medicine",
             }),

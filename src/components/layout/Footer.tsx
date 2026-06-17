@@ -71,8 +71,8 @@ export default function Footer() {
                 🌙
               </div>
               <div>
+                <img src="/images/logo.png" alt="원광대학교 광주한방병원" style={{ height: 18, mixBlendMode: 'multiply', marginBottom: 2, display: 'block' }} />
                 <div style={{ fontWeight: 700, fontSize: '0.95rem' }}>수면장애클리닉</div>
-                <div style={{ fontSize: '0.7rem', color: 'var(--color-text-muted)' }}>원광대학교 광주한방병원</div>
               </div>
             </div>
             <p style={{ fontSize: '0.85rem', color: 'var(--color-text-secondary)', lineHeight: 1.8 }}>
@@ -114,7 +114,7 @@ export default function Footer() {
             </h4>
             <div style={{ display: 'flex', flexDirection: 'column', gap: 10, fontSize: '0.875rem', color: 'var(--color-text-secondary)' }}>
               <span>📍 광주광역시 남구 회재로 1140-23</span>
-              <span>📞 062-670-6700</span>
+              <span>📞 062-670-6412</span>
               <span>🕐 평일 09:00 - 17:30</span>
               <span>🕐 토요일 09:00 - 12:30</span>
             </div>

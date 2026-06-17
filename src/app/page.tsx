@@ -52,7 +52,7 @@ export default function HomePage() {
             fontSize: '0.875rem',
             color: 'var(--color-primary)',
           }}>
-            🌙 원광대학교 광주한방병원
+            <img src="/images/logo.png" alt="원광대학교 광주한방병원" style={{ height: 18, mixBlendMode: 'multiply' }} />
           </div>
 
           <h1 style={{

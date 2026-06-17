@@ -87,28 +87,27 @@ export default function SleepInfoPage() {
         <div className="section-container">
           <div style={{
             display: 'grid',
-            gridTemplateColumns: 'repeat(auto-fit, minmax(340px, 1fr))',
-            gap: 20,
+            gridTemplateColumns: 'repeat(auto-fill, minmax(280px, 1fr))',
+            gap: 16,
           }}>
             {ARTICLES.map((article) => (
               <Link key={article.slug} href={`/sleep-info/${article.slug}`} style={{ textDecoration: 'none' }}>
-                <div className="glass-card" style={{ padding: 28, height: '100%', cursor: 'pointer' }}>
+                <div className="glass-card" style={{ padding: '20px 24px', height: '100%', cursor: 'pointer', display: 'flex', alignItems: 'center', gap: 16 }}>
                   <div style={{
-                    width: 56, height: 56, borderRadius: 14,
+                    width: 48, height: 48, borderRadius: 12, flexShrink: 0,
                     background: 'rgba(44, 95, 124, 0.08)',
                     display: 'flex', alignItems: 'center', justifyContent: 'center',
-                    fontSize: '1.5rem', marginBottom: 16,
+                    fontSize: '1.4rem'
                   }}>
                     {article.icon}
                   </div>
-                  <h2 style={{ fontSize: '1.15rem', fontWeight: 700, marginBottom: 10, color: 'var(--color-text-primary)' }}>
-                    {article.title}
-                  </h2>
-                  <p style={{ fontSize: '0.9rem', color: 'var(--color-text-secondary)', lineHeight: 1.7 }}>
-                    {article.desc}
-                  </p>
-                  <div style={{ marginTop: 16, fontSize: '0.875rem', color: 'var(--color-accent-light)', fontWeight: 500 }}>
-                    자세히 보기 →
+                  <div style={{ flex: 1, minWidth: 0 }}>
+                    <h2 style={{ fontSize: '1.05rem', fontWeight: 700, marginBottom: 4, color: 'var(--color-text-primary)', whiteSpace: 'nowrap', overflow: 'hidden', textOverflow: 'ellipsis' }}>
+                      {article.title}
+                    </h2>
+                    <p style={{ fontSize: '0.85rem', color: 'var(--color-text-secondary)', whiteSpace: 'nowrap', overflow: 'hidden', textOverflow: 'ellipsis' }}>
+                      {article.desc}
+                    </p>
                   </div>
                 </div>
               </Link>

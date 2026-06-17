@@ -1,6 +1,7 @@
 import Link from 'next/link';
 import { notFound } from 'next/navigation';
 import type { Metadata } from 'next';
+import Carousel from '@/components/ui/Carousel';
 
 const ARTICLES: Record<string, { title: string; content: string; icon: string }> = {
   'cardnews-1': {
@@ -215,6 +216,15 @@ export default async function SleepInfoDetailPage({ params }: { params: Promise<
   const article = ARTICLES[slug];
   if (!article) notFound();
 
+  const imageRegex = /!\[.*?\]\((.*?)\)/g;
+  const images: string[] = [];
+  let match;
+  while ((match = imageRegex.exec(article.content)) !== null) {
+    images.push(match[1]);
+  }
+
+  const textContent = article.content.replace(imageRegex, '').trim();
+
   return (
     <div>
       <section style={{ padding: '80px 24px 0', background: 'var(--color-surface)' }}>
@@ -234,7 +244,9 @@ export default async function SleepInfoDetailPage({ params }: { params: Promise<
             <h1 style={{ fontSize: 'clamp(1.5rem, 3vw, 2rem)', fontWeight: 800, marginBottom: 32, lineHeight: 1.4 }}>
               {article.title}
             </h1>
-            <div style={{ fontSize: '0.95rem', lineHeight: 1.9, color: 'var(--color-text-secondary)' }} dangerouslySetInnerHTML={{ __html: renderContent(article.content) }} />
+            
+            {images.length > 0 && <Carousel images={images} />}
+            {textContent && <div style={{ fontSize: '0.95rem', lineHeight: 1.9, color: 'var(--color-text-secondary)' }} dangerouslySetInnerHTML={{ __html: renderContent(textContent) }} />}
 
             <div style={{ marginTop: 48, padding: '28px 24px', borderRadius: 14, background: 'rgba(44, 95, 124, 0.05)', border: '1px solid rgba(44, 95, 124, 0.1)', textAlign: 'center' }}>
               <p style={{ fontSize: '1rem', fontWeight: 600, marginBottom: 8 }}>수면 문제로 고민이신가요?</p>

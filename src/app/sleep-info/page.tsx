@@ -8,6 +8,12 @@ export const metadata: Metadata = {
 
 const ARTICLES = [
   {
+    slug: 'cardnews-1',
+    title: '수면장애 클리닉 1편',
+    desc: '잠 못 드는 것도 치료가 필요한 증상일까요? 카드뉴스로 알아봅니다.',
+    icon: '📱',
+  },
+  {
     slug: 'insomnia',
     title: '불면증의 원인과 한방치료',
     desc: '불면증의 다양한 원인과 한의학적 치료 접근법에 대해 알아봅니다.',

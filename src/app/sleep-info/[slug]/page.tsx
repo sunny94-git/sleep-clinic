@@ -3,6 +3,25 @@ import { notFound } from 'next/navigation';
 import type { Metadata } from 'next';
 
 const ARTICLES: Record<string, { title: string; content: string; icon: string }> = {
+  'cardnews-1': {
+    title: '수면장애 클리닉 1편: 잠 못 드는 것도 치료가 필요한 증상일까요?',
+    icon: '📱',
+    content: `수면 문제의 원인과 수면장애 클리닉에서 확인하는 증상들을 카드뉴스로 알아봅니다.
+
+![카드뉴스 1](/images/cardnews/part1/1.png)
+
+![카드뉴스 2](/images/cardnews/part1/2.png)
+
+![카드뉴스 3](/images/cardnews/part1/3.png)
+
+![카드뉴스 4](/images/cardnews/part1/4.png)
+
+![카드뉴스 5](/images/cardnews/part1/5.png)
+
+![카드뉴스 6](/images/cardnews/part1/6.png)
+
+![카드뉴스 7](/images/cardnews/part1/7.png)`
+  },
   insomnia: {
     title: '불면증의 원인과 한방치료',
     icon: '😴',
@@ -187,6 +206,7 @@ function renderContent(raw: string): string {
     .replace(/^### (.+)$/gm, '<h4 style="font-size:1.05rem;font-weight:700;margin:24px 0 10px;color:var(--color-text-primary)">$1</h4>')
     .replace(/^## (.+)$/gm, '<h3 style="font-size:1.25rem;font-weight:700;margin:36px 0 14px;color:var(--color-accent-light)">$1</h3>')
     .replace(/^• (.+)$/gm, '<div style="display:flex;gap:8px;margin:6px 0 6px 8px;line-height:1.7"><span style="color:var(--color-accent-light)">•</span><span>$1</span></div>')
+    .replace(/^!\[(.*?)\]\((.*?)\)$/gm, '<div style="text-align:center; margin: 32px 0;"><img src="$2" alt="$1" style="max-width:100%; height:auto; border-radius:16px; box-shadow:0 10px 30px rgba(0,0,0,0.08);" /></div>')
     .replace(/\n\n/g, '<div style="height:12px"></div>');
 }
 

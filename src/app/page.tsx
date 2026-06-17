@@ -49,10 +49,8 @@ export default function HomePage() {
             background: 'rgba(44, 95, 124, 0.08)',
             border: '1px solid rgba(44, 95, 124, 0.15)',
             marginBottom: 24,
-            fontSize: '0.875rem',
-            color: 'var(--color-primary)',
           }}>
-            <img src="/images/logo.png" alt="원광대학교 광주한방병원" style={{ height: 18, mixBlendMode: 'multiply' }} />
+            <img src="/images/logo.png" alt="원광대학교 광주한방병원" style={{ height: 40, mixBlendMode: 'multiply' }} />
           </div>
 
           <h1 style={{

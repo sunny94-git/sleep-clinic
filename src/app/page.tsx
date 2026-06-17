@@ -70,7 +70,7 @@ export default function HomePage() {
             </Link>
           </div>
 
-          <img src="/images/logo.png" alt="원광대학교 광주한방병원" style={{ height: 100, mixBlendMode: 'multiply' }} />
+          <img src="/images/logo.png" alt="원광대학교 광주한방병원" style={{ height: 70, mixBlendMode: 'multiply', display: 'block', margin: '0 auto' }} />
         </div>
       </section>
 

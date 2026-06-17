@@ -23,6 +23,25 @@ const ARTICLES: Record<string, { title: string; content: string; icon: string }>
 
 ![카드뉴스 7](/images/cardnews/part1/7.png)`
   },
+  'cardnews-2': {
+    title: '수면장애 클리닉 2편',
+    icon: '📱',
+    content: `수면장애 클리닉 2편 카드뉴스입니다.
+
+![카드뉴스 1](/images/cardnews/part2/1.png)
+
+![카드뉴스 2](/images/cardnews/part2/2.png)
+
+![카드뉴스 3](/images/cardnews/part2/3.png)
+
+![카드뉴스 4](/images/cardnews/part2/4.png)
+
+![카드뉴스 5](/images/cardnews/part2/5.png)
+
+![카드뉴스 6](/images/cardnews/part2/6.png)
+
+![카드뉴스 7](/images/cardnews/part2/7.png)`
+  },
   insomnia: {
     title: '불면증의 원인과 한방치료',
     icon: '😴',

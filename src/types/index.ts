@@ -1,11 +1,9 @@
-export type PostCategory = 'notice' | 'free' | 'sleep_info';
+export type PostCategory = 'notice';
 export type QACategory = 'consultation' | 'treatment' | 'cost' | 'symptom';
 export type QAStatus = 'pending' | 'answered';
 
 export const POST_CATEGORY_LABELS: Record<PostCategory, string> = {
   notice: '공지사항',
-  free: '자유게시판',
-  sleep_info: '수면정보',
 };
 
 export const QA_CATEGORY_LABELS: Record<QACategory, string> = {

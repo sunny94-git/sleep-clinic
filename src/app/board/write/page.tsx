@@ -6,8 +6,6 @@ import { useSession } from 'next-auth/react';
 
 const ALL_CATEGORIES = [
   { value: 'notice', label: '공지사항' },
-  { value: 'free', label: '자유게시판' },
-  { value: 'sleep_info', label: '수면정보' },
 ];
 
 export default function WritePostPage() {
@@ -16,7 +14,7 @@ export default function WritePostPage() {
   const isAdmin = status === 'authenticated' && (session as any)?.user?.role === 'admin';
   
   const [form, setForm] = useState({ 
-    category: 'free', 
+    category: 'notice', 
     title: '', 
     content: '', 
     authorName: '',
@@ -25,15 +23,10 @@ export default function WritePostPage() {
   const [submitting, setSubmitting] = useState(false);
   const [error, setError] = useState('');
 
-  // Allowed categories based on role
-  const availableCategories = isAdmin 
-    ? ALL_CATEGORIES 
-    : ALL_CATEGORIES.filter(c => c.value === 'free');
+  // Allowed categories
+  const availableCategories = ALL_CATEGORIES;
 
   useEffect(() => {
-    if (status === 'unauthenticated' && form.category !== 'free') {
-      setForm(f => ({ ...f, category: 'free' }));
-    }
     if (isAdmin && form.authorName === '') {
        setForm(f => ({ ...f, authorName: '관리자' }));
     }

@@ -44,18 +44,7 @@ export async function DELETE(
     if (!existing) return NextResponse.json({ error: '게시글을 찾을 수 없습니다.' }, { status: 404 });
 
     if (!isAdmin) {
-      if (existing.category !== 'free') return NextResponse.json({ error: '공지사항이나 수면정보는 관리자만 삭제 가능합니다.' }, { status: 403 });
-      
-      let body;
-      try { body = await request.json(); } catch(e) { body = {}; }
-      
-      const { password } = body;
-      if (!password || !existing.passwordHash) {
-        return NextResponse.json({ error: '삭제 권한이 없습니다 (비밀번호 필요).' }, { status: 401 });
-      }
-      
-      const isMatch = await compare(password, existing.passwordHash);
-      if (!isMatch) return NextResponse.json({ error: '비밀번호가 일치하지 않습니다.' }, { status: 401 });
+      return NextResponse.json({ error: '게시글은 관리자만 삭제 가능합니다.' }, { status: 403 });
     }
 
     await prisma.post.delete({ where: { id } });
@@ -83,14 +72,7 @@ export async function PATCH(
 
     // Authorization checks
     if (!isAdmin) {
-      if (existing.category !== 'free') return NextResponse.json({ error: '권한이 없습니다 (관리자 전용).' }, { status: 403 });
-      
-      if (!password || !existing.passwordHash) {
-        return NextResponse.json({ error: '수정 권한이 없습니다 (비밀번호 필요).' }, { status: 401 });
-      }
-      
-      const isMatch = await compare(password, existing.passwordHash);
-      if (!isMatch) return NextResponse.json({ error: '비밀번호가 일치하지 않습니다.' }, { status: 401 });
+      return NextResponse.json({ error: '권한이 없습니다 (관리자 전용).' }, { status: 403 });
     }
 
     const post = await prisma.post.update({

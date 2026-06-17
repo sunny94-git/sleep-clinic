@@ -17,8 +17,6 @@ interface Post {
 const TABS = [
   { value: 'all', label: '전체' },
   { value: 'notice', label: '공지사항' },
-  { value: 'free', label: '자유게시판' },
-  { value: 'sleep_info', label: '수면정보' },
 ];
 
 export default function BoardPage() {
@@ -59,7 +57,7 @@ export default function BoardPage() {
           <h1 style={{ fontSize: 'clamp(2rem, 4vw, 2.75rem)', fontWeight: 800, marginBottom: 12 }}>
             <span style={{ color: 'var(--color-primary)' }}>게시판</span>
           </h1>
-          <p style={{ color: 'var(--color-text-secondary)' }}>공지사항, 자유게시판, 수면정보를 확인하세요</p>
+          <p style={{ color: 'var(--color-text-secondary)' }}>공지사항을 확인하세요</p>
         </div>
       </section>
 
@@ -78,7 +76,7 @@ export default function BoardPage() {
                 </button>
               ))}
             </div>
-            {(isAdmin || (category !== 'notice' && category !== 'sleep_info')) && (
+            {isAdmin && (
               <Link href="/board/write" className="btn-primary" style={{ padding: '10px 24px', fontSize: '0.875rem' }}>
                 ✏️ 글쓰기
               </Link>

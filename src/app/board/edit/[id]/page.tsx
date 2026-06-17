@@ -6,8 +6,6 @@ import { useSession } from 'next-auth/react';
 
 const ALL_CATEGORIES = [
   { value: 'notice', label: '공지사항' },
-  { value: 'free', label: '자유게시판' },
-  { value: 'sleep_info', label: '수면정보' },
 ];
 
 export default function EditPostPage({ params }: { params: Promise<{ id: string }> }) {
@@ -17,7 +15,7 @@ export default function EditPostPage({ params }: { params: Promise<{ id: string 
   const isAdmin = (session as any)?.user?.role === 'admin';
 
   const [form, setForm] = useState({ 
-    category: 'free', 
+    category: 'notice', 
     title: '', 
     content: '', 
     authorName: '',
@@ -27,9 +25,7 @@ export default function EditPostPage({ params }: { params: Promise<{ id: string 
   const [submitting, setSubmitting] = useState(false);
   const [error, setError] = useState('');
 
-  const availableCategories = isAdmin 
-    ? ALL_CATEGORIES 
-    : ALL_CATEGORIES.filter(c => c.value === 'free');
+  const availableCategories = ALL_CATEGORIES;
 
   useEffect(() => {
     fetch(`/api/posts/${id}`)

@@ -70,12 +70,7 @@ export async function POST(request: NextRequest) {
 
     // Permission check
     if (!isAdmin) {
-      if (category !== 'free') {
-        return NextResponse.json({ error: '공지사항이나 수면정보는 관리자만 작성 가능합니다.' }, { status: 403 });
-      }
-      if (!password || password.length < 4) {
-        return NextResponse.json({ error: '게시글 수정을 위해 비밀번호 4자리 이상이 필요합니다.' }, { status: 400 });
-      }
+      return NextResponse.json({ error: '공지사항은 관리자만 작성 가능합니다.' }, { status: 403 });
     }
 
     const passwordHash = password ? await hash(password, 10) : null;
@@ -100,10 +95,7 @@ export async function POST(request: NextRequest) {
       }
     }).catch(console.error);
 
-    // Admin notification for free board (non-blocking)
-    if (post.category === 'free') {
-      sendAdminNotification('board', post.authorName, post.title).catch(console.error);
-    }
+
 
     return NextResponse.json(post, { status: 201 });
   } catch (error) {

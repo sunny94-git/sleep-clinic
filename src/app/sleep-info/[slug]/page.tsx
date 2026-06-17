@@ -26,21 +26,39 @@ const ARTICLES: Record<string, { title: string; content: string; icon: string }>
   'cardnews-2': {
     title: '수면장애 클리닉 2편',
     icon: '📱',
-    content: `수면장애 클리닉 2편 카드뉴스입니다.
-
-![카드뉴스 1](/images/cardnews/part2/1.png)
-
-![카드뉴스 2](/images/cardnews/part2/2.png)
-
-![카드뉴스 3](/images/cardnews/part2/3.png)
-
-![카드뉴스 4](/images/cardnews/part2/4.png)
-
-![카드뉴스 5](/images/cardnews/part2/5.png)
-
-![카드뉴스 6](/images/cardnews/part2/6.png)
-
-![카드뉴스 7](/images/cardnews/part2/7.png)`
+    content: `수면장애 클리닉 2편 카드뉴스입니다.\n\n![카드뉴스 1](/images/cardnews/part2/1.png)\n\n![카드뉴스 2](/images/cardnews/part2/2.png)\n\n![카드뉴스 3](/images/cardnews/part2/3.png)\n\n![카드뉴스 4](/images/cardnews/part2/4.png)\n\n![카드뉴스 5](/images/cardnews/part2/5.png)\n\n![카드뉴스 6](/images/cardnews/part2/6.png)\n\n![카드뉴스 7](/images/cardnews/part2/7.png)`
+  },
+  'cardnews-3': {
+    title: '수면장애 클리닉 3편', icon: '📱',
+    content: `수면장애 클리닉 3편 카드뉴스입니다.\n\n![1](/images/cardnews/part3/1.png)\n\n![2](/images/cardnews/part3/2.png)\n\n![3](/images/cardnews/part3/3.png)\n\n![4](/images/cardnews/part3/4.png)\n\n![5](/images/cardnews/part3/5.png)\n\n![6](/images/cardnews/part3/6.png)\n\n![7](/images/cardnews/part3/7.png)\n\n![8](/images/cardnews/part3/8.png)`
+  },
+  'cardnews-4': {
+    title: '수면장애 클리닉 4편', icon: '📱',
+    content: `수면장애 클리닉 4편 카드뉴스입니다.\n\n![1](/images/cardnews/part4/1.png)\n\n![2](/images/cardnews/part4/2.png)\n\n![3](/images/cardnews/part4/3.png)\n\n![4](/images/cardnews/part4/4.png)\n\n![5](/images/cardnews/part4/5.png)\n\n![6](/images/cardnews/part4/6.png)\n\n![7](/images/cardnews/part4/7.png)\n\n![8](/images/cardnews/part4/8.png)`
+  },
+  'cardnews-5': {
+    title: '수면장애 클리닉 5편', icon: '📱',
+    content: `수면장애 클리닉 5편 카드뉴스입니다.\n\n![1](/images/cardnews/part5/1.png)\n\n![2](/images/cardnews/part5/2.png)\n\n![3](/images/cardnews/part5/3.png)\n\n![4](/images/cardnews/part5/4.png)\n\n![5](/images/cardnews/part5/5.png)\n\n![6](/images/cardnews/part5/6.png)\n\n![7](/images/cardnews/part5/7.png)`
+  },
+  'cardnews-6': {
+    title: '수면장애 클리닉 6편', icon: '📱',
+    content: `수면장애 클리닉 6편 카드뉴스입니다.\n\n![1](/images/cardnews/part6/1.png)\n\n![2](/images/cardnews/part6/2.png)\n\n![3](/images/cardnews/part6/3.png)\n\n![4](/images/cardnews/part6/4.png)\n\n![5](/images/cardnews/part6/5.png)\n\n![6](/images/cardnews/part6/6.png)\n\n![7](/images/cardnews/part6/7.png)`
+  },
+  'cardnews-7': {
+    title: '수면장애 클리닉 7편', icon: '📱',
+    content: `수면장애 클리닉 7편 카드뉴스입니다.\n\n![1](/images/cardnews/part7/1.png)\n\n![2](/images/cardnews/part7/2.png)\n\n![3](/images/cardnews/part7/3.png)\n\n![4](/images/cardnews/part7/4.png)\n\n![5](/images/cardnews/part7/5.png)\n\n![6](/images/cardnews/part7/6.png)\n\n![7](/images/cardnews/part7/7.png)`
+  },
+  'cardnews-8': {
+    title: '수면장애 클리닉 8편', icon: '📱',
+    content: `수면장애 클리닉 8편 카드뉴스입니다.\n\n![1](/images/cardnews/part8/1.png)\n\n![2](/images/cardnews/part8/2.png)\n\n![3](/images/cardnews/part8/3.png)\n\n![4](/images/cardnews/part8/4.png)\n\n![5](/images/cardnews/part8/5.png)\n\n![6](/images/cardnews/part8/6.png)\n\n![7](/images/cardnews/part8/7.png)`
+  },
+  'cardnews-9': {
+    title: '수면장애 클리닉 9편', icon: '📱',
+    content: `수면장애 클리닉 9편 카드뉴스입니다.\n\n![1](/images/cardnews/part9/1.png)\n\n![2](/images/cardnews/part9/2.png)\n\n![3](/images/cardnews/part9/3.png)\n\n![4](/images/cardnews/part9/4.png)\n\n![5](/images/cardnews/part9/5.png)\n\n![6](/images/cardnews/part9/6.png)\n\n![7](/images/cardnews/part9/7.png)`
+  },
+  'cardnews-10': {
+    title: '수면장애 클리닉 10편', icon: '📱',
+    content: `수면장애 클리닉 10편 카드뉴스입니다.\n\n![1](/images/cardnews/part10/1.png)\n\n![2](/images/cardnews/part10/2.png)\n\n![3](/images/cardnews/part10/3.png)\n\n![4](/images/cardnews/part10/4.png)\n\n![5](/images/cardnews/part10/5.png)\n\n![6](/images/cardnews/part10/6.png)\n\n![7](/images/cardnews/part10/7.png)`
   },
   insomnia: {
     title: '불면증의 원인과 한방치료',

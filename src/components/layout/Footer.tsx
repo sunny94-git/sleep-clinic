@@ -58,20 +58,8 @@ export default function Footer() {
           {/* Clinic Info */}
           <div>
             <div style={{ display: 'flex', alignItems: 'center', gap: 10, marginBottom: 16 }}>
-              <div style={{
-                width: 36,
-                height: 36,
-                borderRadius: 10,
-                background: 'linear-gradient(135deg, #2C5F7C, #3A7CA5)',
-                display: 'flex',
-                alignItems: 'center',
-                justifyContent: 'center',
-                fontSize: '1rem',
-              }}>
-                🌙
-              </div>
               <div>
-                <img src="/images/logo.png" alt="원광대학교 광주한방병원" style={{ height: 28, mixBlendMode: 'multiply', marginBottom: 2, display: 'block' }} />
+                <img src="/images/logo.png" alt="원광대학교 광주한방병원" style={{ height: 70, mixBlendMode: 'multiply', marginBottom: 4, display: 'block' }} />
                 <div style={{ fontWeight: 700, fontSize: '0.95rem' }}>수면장애클리닉</div>
               </div>
             </div>

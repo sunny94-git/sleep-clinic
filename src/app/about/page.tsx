@@ -6,11 +6,11 @@ export const metadata: Metadata = {
 };
 
 const TREATMENTS = [
-  { icon: '🌿', name: '한약치료', desc: '체질과 증상에 맞는 맞춤 한약 처방으로 근본적인 수면 기능을 회복합니다.' },
-  { icon: '📍', name: '침구치료', desc: '경혈 자극을 통해 자율신경계를 안정시키고 수면의 질을 개선합니다.' },
-  { icon: '🔥', name: '뜸치료', desc: '온열 자극으로 기혈 순환을 촉진하여 심신을 안정시킵니다.' },
-  { icon: '💆', name: '추나치료', desc: '근골격계 이완을 통해 신체 긴장을 해소하고 편안한 수면을 유도합니다.' },
-  { icon: '🧘', name: '이완훈련', desc: '호흡법, 명상 등 비약물적 방법으로 수면 위생을 개선합니다.' },
+  { icon: '📍', name: '한방 치료 (침/약침 등)', points: ['몸의 긴장을 풀고, 편안하게 잠들 수 있도록 돕습니다.', '목·어깨·턱 주변 긴장, 두통/어지럼, 몸살 같은 피로감이 동반될 때도 함께 관리합니다.'] },
+  { icon: '🌿', name: '한약/한방 수면 처방', points: ['체질과 증상에 맞춘 처방으로 잠드는 힘과 회복력을 함께 돕습니다.', '필요 시 복용 중인 수면제 감량 과정에서도 안정적으로 도움을 줄 수 있도록 계획합니다.'] },
+  { icon: '📅', name: '수면 습관 교정 (수면 위생)', points: ['‘잠이 잘 오게 만드는 환경과 루틴’을 함께 점검합니다.', '취침/기상 시간, 낮잠, 카페인/알코올, 스마트폰 사용, 운동·식사 시간 등을 현실적으로 조정합니다.'] },
+  { icon: '🧘', name: '긴장 완화 & 자율신경 안정', points: ['예민함, 불안, 머리가 맑지 않음, 자주 깨는 수면 등 긴장(과각성)이 중심일 때 도움이 됩니다.', '호흡, 이완 훈련, 생활 리듬 조정, 필요 시 기기/자극 치료 등을 함께 적용할 수 있습니다.'] },
+  { icon: '🔋', name: '깊은 잠·회복력 보강', points: ['‘푹 잔 느낌이 없다’, 아침이 개운하지 않다, 피로가 오래 간다 같은 회복(깊은잠) 문제가 중심일 때 도움이 됩니다.', '호흡/루틴 최적화, 목·림프 순환 관리, 체액 균형 관리 등을 상태에 맞게 진행합니다.'] },
 ];
 
 const PROCESS = [
@@ -73,26 +73,42 @@ export default function AboutPage() {
       {/* Treatment Methods */}
       <section style={{ padding: '0 24px 80px' }}>
         <div className="section-container">
-          <h2 style={{ fontSize: '1.75rem', fontWeight: 700, textAlign: 'center', marginBottom: 40 }}>
+          <h2 style={{ fontSize: '1.75rem', fontWeight: 700, textAlign: 'center', marginBottom: 16 }}>
             <span style={{ color: 'var(--color-primary)' }}>치료 방법</span>
           </h2>
+          <p style={{ textAlign: 'center', color: 'var(--color-text-secondary)', marginBottom: 40, fontSize: '1.05rem', wordBreak: 'keep-all' }}>
+            수면 문제는 한 가지 방법으로만 해결되지 않는 경우가 많습니다.<br/>
+            현재 상태에 맞춰 필요한 치료를 진행합니다.
+          </p>
           <div style={{
             display: 'grid',
-            gridTemplateColumns: 'repeat(auto-fit, minmax(280px, 1fr))',
-            gap: 20,
+            gridTemplateColumns: 'repeat(auto-fit, minmax(320px, 1fr))',
+            gap: 24,
           }}>
             {TREATMENTS.map((t, i) => (
-              <div key={i} className="glass-card" style={{ padding: 24 }}>
+              <div key={i} className="glass-card" style={{ padding: '32px 24px' }}>
                 <div style={{
-                  fontSize: '2rem', marginBottom: 12,
-                  width: 56, height: 56, borderRadius: 14,
-                  background: 'rgba(44, 95, 124, 0.08)',
+                  fontSize: '2.2rem', marginBottom: 16,
+                  width: 64, height: 64, borderRadius: 16,
+                  background: 'rgba(44, 95, 124, 0.06)',
                   display: 'flex', alignItems: 'center', justifyContent: 'center',
                 }}>
                   {t.icon}
                 </div>
-                <h3 style={{ fontSize: '1.05rem', fontWeight: 700, marginBottom: 8 }}>{t.name}</h3>
-                <p style={{ fontSize: '0.875rem', color: 'var(--color-text-secondary)', lineHeight: 1.7 }}>{t.desc}</p>
+                <h3 style={{ fontSize: '1.2rem', fontWeight: 700, marginBottom: 16, color: 'var(--color-primary-dark)' }}>{t.name}</h3>
+                <ul style={{ 
+                  listStyleType: 'disc', 
+                  paddingLeft: 20, 
+                  fontSize: '0.9rem', 
+                  color: 'var(--color-text-secondary)', 
+                  lineHeight: 1.7 
+                }}>
+                  {t.points.map((point, idx) => (
+                    <li key={idx} style={{ marginBottom: 8, wordBreak: 'keep-all' }}>
+                      {point}
+                    </li>
+                  ))}
+                </ul>
               </div>
             ))}
           </div>

@@ -59,7 +59,7 @@ export default function Footer() {
           <div>
             <div style={{ display: 'flex', alignItems: 'center', gap: 10, marginBottom: 16 }}>
               <div>
-                <img src="/images/logo.png" alt="원광대학교 광주한방병원" style={{ height: 70, mixBlendMode: 'multiply', marginBottom: 4, display: 'block' }} />
+                <img src="/images/logo.png" alt="원광대학교 광주한방병원" style={{ height: 49, mixBlendMode: 'multiply', marginBottom: 4, display: 'block' }} />
                 <div style={{ fontWeight: 700, fontSize: '0.95rem' }}>수면장애클리닉</div>
               </div>
             </div>

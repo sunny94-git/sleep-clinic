@@ -40,19 +40,6 @@ export default function HomePage() {
         }} />
 
         <div className="section-container" style={{ position: 'relative', zIndex: 1 }}>
-          <div style={{
-            display: 'inline-flex',
-            alignItems: 'center',
-            gap: 8,
-            padding: '8px 20px',
-            borderRadius: 20,
-            background: 'rgba(44, 95, 124, 0.08)',
-            border: '1px solid rgba(44, 95, 124, 0.15)',
-            marginBottom: 24,
-          }}>
-            <img src="/images/logo.png" alt="원광대학교 광주한방병원" style={{ height: 100, mixBlendMode: 'multiply' }} />
-          </div>
-
           <h1 style={{
             fontSize: 'clamp(2rem, 5vw, 3.5rem)',
             fontWeight: 800,
@@ -74,7 +61,7 @@ export default function HomePage() {
             맞춤 한방치료로 숙면을 되찾으세요.
           </p>
 
-          <div style={{ display: 'flex', gap: 16, justifyContent: 'center', flexWrap: 'wrap' }}>
+          <div style={{ display: 'flex', gap: 16, justifyContent: 'center', flexWrap: 'wrap', marginBottom: 40 }}>
             <Link href="/qa/ask" className="btn-primary" style={{ fontSize: '1rem', padding: '14px 36px' }}>
               상담 예약하기
             </Link>
@@ -82,6 +69,8 @@ export default function HomePage() {
               수면정보 보기
             </Link>
           </div>
+
+          <img src="/images/logo.png" alt="원광대학교 광주한방병원" style={{ height: 100, mixBlendMode: 'multiply' }} />
         </div>
       </section>
 

@@ -14,10 +14,12 @@ const TREATMENTS = [
 ];
 
 const PROCESS = [
-  { step: '01', title: '초진 상담', desc: '수면 습관, 병력 등 종합적인 상담을 진행합니다.' },
-  { step: '02', title: '검사 및 진단', desc: '필요시 다양한 객관적 검사 및 설문을 시행합니다.' },
-  { step: '03', title: '맞춤 치료', desc: '체질과 증상에 따른 개인 맞춤 치료 계획을 수립합니다.' },
-  { step: '04', title: '경과 관리', desc: '정기적인 추적 관찰과 치료 조정을 진행합니다.' },
+  { step: '01', title: '내원/상담', desc: '아래와 같은 불편이 있다면 편하게 말씀해 주세요.', points: ['잠들기 어렵다 / 자주 깬다 / 너무 일찍 깬다', '푹 잔 것 같지 않다', '낮에 피곤하다, 졸리다, 집중이 안 된다', '코골이, 숨이 멈추는 느낌', '다리가 불편해서 잠들기 어렵다'] },
+  { step: '02', title: '1차 스크리닝', desc: '필요 시 아래 가능성을 함께 확인합니다.', points: ['불면, 수면무호흡, 하지불안/주기성 하지운동, 렘수면행동장애/몽유병 등', '통증, 스트레스/기분 문제, 복용 중인 약, 카페인/알코올, 생활 패턴'] },
+  { step: '03', title: '정밀 평가', desc: '증상에 따라 필요한 것만 선택해서 진행합니다.', points: ['설문/수면일지: 수면의 질과 패턴 확인', '수면 추적(워치/기기 등): 총수면시간, 수면 효율, 중간각성 등', '자율신경(HRV): 긴장/회복 균형 확인', '체성분(InBody): 부종/체액 균형, 회복 상태 참고', '필요 시 뇌파 기반 평가 등'] },
+  { step: '04', title: '내 몸의 ‘주요 문제’ 분류', desc: '검사와 상담 결과를 바탕으로, 현재 수면 문제의 중심이 어디에 가까운지 정리합니다.', points: ['A. 긴장/과각성형: 예민함, 걱정이 많아 잠이 잘 안 오거나 자주 깨는 유형', 'B. 회복/깊은잠 부족형: 푹 잔 느낌이 없고 피로가 오래 가는 유형'] },
+  { step: '05', title: '맞춤 치료', desc: '상담 결과에 따라 아래를 개인에게 맞게 조합합니다.', points: ['침/약침 등 한방치료', '수면 위생(잠 습관) + 생활 리듬 교정', '자율신경 안정화', '호흡/이완 루틴, 목·림프 순환 관리', '한약/한방 수면 처방'] },
+  { step: '06', title: '4–6주 후 재평가 & 조정', desc: '보통 4–6주 뒤, 변화 정도를 확인하고 치료를 조정합니다.', points: ['잠드는 시간, 중간 각성, 피로/불안, 수면 효율 등'] },
 ];
 
 export default function AboutPage() {
@@ -105,27 +107,53 @@ export default function AboutPage() {
         borderBottom: '1px solid var(--color-border)',
       }}>
         <div className="section-container">
-          <h2 style={{ fontSize: '1.75rem', fontWeight: 700, textAlign: 'center', marginBottom: 48 }}>
+          <h2 style={{ fontSize: '1.75rem', fontWeight: 700, textAlign: 'center', marginBottom: 16 }}>
             <span style={{ color: 'var(--color-primary)' }}>진료 과정</span>
           </h2>
+          <p style={{ textAlign: 'center', color: 'var(--color-text-secondary)', marginBottom: 48, fontSize: '1.05rem', wordBreak: 'keep-all' }}>
+            수면 문제의 원인을 찾기 위해 필요한 검사를 진행하여 결과에 따라 개인에게 맞는 치료를 진행합니다.
+          </p>
           <div style={{
             display: 'grid',
-            gridTemplateColumns: 'repeat(auto-fit, minmax(240px, 1fr))',
+            gridTemplateColumns: 'repeat(auto-fit, minmax(300px, 1fr))',
             gap: 24,
           }}>
             {PROCESS.map((p, i) => (
-              <div key={i} style={{ textAlign: 'center', padding: 16 }}>
+              <div key={i} className="glass-card" style={{ padding: '32px 24px', textAlign: 'center' }}>
                 <div style={{
-                  width: 64, height: 64, borderRadius: '50%',
+                  width: 56, height: 56, borderRadius: '50%',
                   background: 'linear-gradient(135deg, var(--color-accent), var(--color-primary-light))',
                   display: 'flex', alignItems: 'center', justifyContent: 'center',
                   fontSize: '1.1rem', fontWeight: 800, color: 'white',
-                  margin: '0 auto 16px',
+                  margin: '0 auto 20px',
+                  boxShadow: '0 4px 12px rgba(212, 134, 78, 0.3)'
                 }}>
                   {p.step}
                 </div>
-                <h3 style={{ fontSize: '1.1rem', fontWeight: 700, marginBottom: 8 }}>{p.title}</h3>
-                <p style={{ fontSize: '0.875rem', color: 'var(--color-text-secondary)', lineHeight: 1.7 }}>{p.desc}</p>
+                <h3 style={{ fontSize: '1.15rem', fontWeight: 700, marginBottom: 12, color: 'var(--color-primary-dark)' }}>{p.title}</h3>
+                <p style={{ fontSize: '0.9rem', color: 'var(--color-text-primary)', lineHeight: 1.6, marginBottom: 16, fontWeight: 600, wordBreak: 'keep-all' }}>
+                  {p.desc}
+                </p>
+                <ul style={{ 
+                  listStyleType: 'disc', 
+                  paddingLeft: 20, 
+                  textAlign: 'left', 
+                  fontSize: '0.9rem', 
+                  color: 'var(--color-text-secondary)', 
+                  lineHeight: 1.6 
+                }}>
+                  {p.points.map((point, idx) => (
+                    <li key={idx} style={{ marginBottom: 6 }}>
+                      {point.includes(':') ? (
+                        <>
+                          <strong style={{ color: 'var(--color-primary)' }}>{point.split(':')[0]}:</strong>{point.substring(point.indexOf(':') + 1)}
+                        </>
+                      ) : (
+                        point
+                      )}
+                    </li>
+                  ))}
+                </ul>
               </div>
             ))}
           </div>

@@ -8,21 +8,24 @@ interface Stats {
   totalPosts: number;
   totalQA: number;
   pendingQA: number;
+  totalFAQ: number;
 }
 
 export default function AdminDashboard() {
-  const [stats, setStats] = useState<Stats>({ totalPosts: 0, totalQA: 0, pendingQA: 0 });
+  const [stats, setStats] = useState<Stats>({ totalPosts: 0, totalQA: 0, pendingQA: 0, totalFAQ: 0 });
 
   useEffect(() => {
     Promise.all([
       fetch('/api/posts?limit=1').then(r => r.json()),
       fetch('/api/qa?limit=1').then(r => r.json()),
       fetch('/api/qa?status=pending&limit=1').then(r => r.json()),
-    ]).then(([posts, qa, pendingQa]) => {
+      fetch('/api/faq').then(r => r.json()),
+    ]).then(([posts, qa, pendingQa, faqData]) => {
       setStats({
         totalPosts: posts.total || 0,
         totalQA: qa.total || 0,
         pendingQA: pendingQa.total || 0,
+        totalFAQ: faqData.faqs?.length || 0,
       });
     }).catch(console.error);
   }, []);
@@ -31,6 +34,7 @@ export default function AdminDashboard() {
     { label: '전체 게시글', value: stats.totalPosts, icon: '📝', color: '#2C5F7C', href: '/admin/posts' },
     { label: '전체 Q&A', value: stats.totalQA, icon: '❓', color: '#3A7CA5', href: '/admin/qa' },
     { label: '답변 대기', value: stats.pendingQA, icon: '⏳', color: '#f59e0b', href: '/admin/qa' },
+    { label: '자주 묻는 질문', value: stats.totalFAQ, icon: '💬', color: '#10b981', href: '/admin/faq' },
   ];
 
   return (
@@ -81,6 +85,14 @@ export default function AdminDashboard() {
               <h3 style={{ fontSize: '1.1rem', fontWeight: 700, marginBottom: 8 }}>❓ Q&A 관리</h3>
               <p style={{ fontSize: '0.875rem', color: 'var(--color-text-secondary)' }}>
                 대기중인 질문에 답변하기
+              </p>
+            </div>
+          </Link>
+          <Link href="/admin/faq" style={{ textDecoration: 'none' }}>
+            <div className="glass-card" style={{ padding: 28 }}>
+              <h3 style={{ fontSize: '1.1rem', fontWeight: 700, marginBottom: 8 }}>💬 자주 묻는 질문 관리</h3>
+              <p style={{ fontSize: '0.875rem', color: 'var(--color-text-secondary)' }}>
+                FAQ 등록, 수정, 삭제
               </p>
             </div>
           </Link>

@@ -41,29 +41,14 @@ export default function QAPage() {
   const [isDeleting, setIsDeleting] = useState(false);
 
   const [faqOpen, setFaqOpen] = useState<number | null>(null);
+  const [faqItems, setFaqItems] = useState<{ id: string; question: string; answer: string }[]>([]);
 
-  const FAQ_ITEMS = [
-    {
-      q: '수면장애클리닉은 어떤 증상일 때 방문하면 좋을까요?',
-      a: '잠들기 어렵거나, 자주 깨거나, 너무 일찍 깨는 경우, 또는 낮에 피곤하고 졸린 증상이 지속될 때 방문하시면 좋습니다. 코골이, 수면 중 숨이 멈추는 느낌, 다리 불편감 등도 해당됩니다.',
-    },
-    {
-      q: '첫 방문 시 어떤 과정으로 진료가 진행되나요?',
-      a: '먼저 수면 관련 증상에 대한 상담을 진행합니다. 이후 필요에 따라 설문지, 수면다원검사(PSG), 액티그라피 등의 정밀 평가를 실시하고, 결과를 바탕으로 개인 맞춤 치료 계획을 세웁니다.',
-    },
-    {
-      q: '수면제를 줄이고 싶은데 도움을 받을 수 있나요?',
-      a: '네, 가능합니다. 현재 복용 중인 수면제의 종류와 용량을 확인한 뒤, 한방 치료(침, 한약 등)와 수면 습관 교정을 병행하여 안정적으로 감량할 수 있도록 계획합니다.',
-    },
-    {
-      q: '한방치료만으로 수면장애가 나아질 수 있나요?',
-      a: '많은 경우 한방치료(침, 약침, 한약)만으로도 수면의 질이 개선됩니다. 다만 증상에 따라 수면 습관 교정, 인지행동치료(CBT-I), 양압기 치료 등을 함께 진행할 수도 있습니다.',
-    },
-    {
-      q: '진료 예약은 어떻게 하나요?',
-      a: '전화(062-670-6412)로 예약하시거나, 이 페이지의 \'질문하기\' 버튼을 통해 온라인으로 상담을 남겨주시면 됩니다.',
-    },
-  ];
+  useEffect(() => {
+    fetch('/api/faq')
+      .then(res => res.json())
+      .then(data => setFaqItems(data.faqs || []))
+      .catch(() => setFaqItems([]));
+  }, []);
 
   useEffect(() => {
     setLoading(true);
@@ -145,14 +130,15 @@ export default function QAPage() {
       </section>
 
       {/* FAQ Section */}
+      {faqItems.length > 0 && (
       <section style={{ padding: '40px 24px 0' }}>
         <div className="section-container">
           <h2 style={{ fontSize: '1.25rem', fontWeight: 700, marginBottom: 20, color: 'var(--color-text-primary)' }}>
             💬 자주 묻는 질문
           </h2>
           <div style={{ display: 'flex', flexDirection: 'column', gap: 8, marginBottom: 40 }}>
-            {FAQ_ITEMS.map((faq, i) => (
-              <div key={i} className="glass-card" style={{ padding: 0, overflow: 'hidden' }}>
+            {faqItems.map((faq, i) => (
+              <div key={faq.id} className="glass-card" style={{ padding: 0, overflow: 'hidden' }}>
                 <button
                   onClick={() => setFaqOpen(faqOpen === i ? null : i)}
                   style={{
@@ -162,7 +148,7 @@ export default function QAPage() {
                     fontSize: '0.95rem', fontWeight: 600,
                   }}
                 >
-                  <span>Q. {faq.q}</span>
+                  <span>Q. {faq.question}</span>
                   <span style={{
                     transform: faqOpen === i ? 'rotate(180deg)' : 'rotate(0deg)',
                     transition: 'transform 0.2s', fontSize: '0.8rem', flexShrink: 0,
@@ -177,7 +163,7 @@ export default function QAPage() {
                     paddingTop: 16,
                   }}>
                     <strong style={{ color: 'var(--color-accent-light)', marginRight: 6 }}>A.</strong>
-                    {faq.a}
+                    {faq.answer}
                   </div>
                 )}
               </div>
@@ -185,6 +171,7 @@ export default function QAPage() {
           </div>
         </div>
       </section>
+      )}
 
       <section style={{ padding: '40px 24px 80px' }}>
         <div className="section-container">

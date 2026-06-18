@@ -14,7 +14,7 @@ const sleepInfos = [
     type: 'CARDNEWS' as const,
     title: '잠 못 드는 것도 치료가 필요한 증상일까요?',
     desc: '수면 문제의 원인과 수면장애 클리닉에서 확인하는 증상들을 카드뉴스로 알아봅니다.',
-    icon: '📱',
+    icon: '🩺',
     order: 0,
     content: `![카드뉴스 1](/images/cardnews/part1/1.png)\n\n![카드뉴스 2](/images/cardnews/part1/2.png)\n\n![카드뉴스 3](/images/cardnews/part1/3.png)\n\n![카드뉴스 4](/images/cardnews/part1/4.png)\n\n![카드뉴스 5](/images/cardnews/part1/5.png)\n\n![카드뉴스 6](/images/cardnews/part1/6.png)\n\n![카드뉴스 7](/images/cardnews/part1/7.png)`
   },
@@ -23,47 +23,47 @@ const sleepInfos = [
     type: 'CARDNEWS' as const,
     title: '수면장애에 대한 오해와 진실',
     desc: '수면 클리닉의 새로운 접근법을 카드뉴스로 알아봅니다.',
-    icon: '📱',
+    icon: '💡',
     order: 1,
     content: `![카드뉴스 1](/images/cardnews/part2/1.png)\n\n![카드뉴스 2](/images/cardnews/part2/2.png)\n\n![카드뉴스 3](/images/cardnews/part2/3.png)\n\n![카드뉴스 4](/images/cardnews/part2/4.png)\n\n![카드뉴스 5](/images/cardnews/part2/5.png)\n\n![카드뉴스 6](/images/cardnews/part2/6.png)\n\n![카드뉴스 7](/images/cardnews/part2/7.png)`
   },
   {
-    slug: 'cardnews-3', type: 'CARDNEWS' as const, icon: '📱', order: 2,
+    slug: 'cardnews-3', type: 'CARDNEWS' as const, icon: '💊', order: 2,
     title: '수면제를 먹기 전, 먼저 확인해야 할 것들', desc: '수면제를 복용하기 전에 알아두면 좋은 유용한 정보를 알아봅니다.',
     content: `![1](/images/cardnews/part3/1.png)\n\n![2](/images/cardnews/part3/2.png)\n\n![3](/images/cardnews/part3/3.png)\n\n![4](/images/cardnews/part3/4.png)\n\n![5](/images/cardnews/part3/5.png)\n\n![6](/images/cardnews/part3/6.png)\n\n![7](/images/cardnews/part3/7.png)\n\n![8](/images/cardnews/part3/8.png)`
   },
   {
-    slug: 'cardnews-4', type: 'CARDNEWS' as const, icon: '📱', order: 3,
+    slug: 'cardnews-4', type: 'CARDNEWS' as const, icon: '🏥', order: 3,
     title: '한방병원 수면장애 클리닉, 무엇을 보나요?', desc: '한방병원 수면 클리닉의 진료 과정과 치료법을 알아봅니다.',
     content: `![1](/images/cardnews/part4/1.png)\n\n![2](/images/cardnews/part4/2.png)\n\n![3](/images/cardnews/part4/3.png)\n\n![4](/images/cardnews/part4/4.png)\n\n![5](/images/cardnews/part4/5.png)\n\n![6](/images/cardnews/part4/6.png)\n\n![7](/images/cardnews/part4/7.png)\n\n![8](/images/cardnews/part4/8.png)`
   },
   {
-    slug: 'cardnews-5', type: 'CARDNEWS' as const, icon: '📱', order: 4,
+    slug: 'cardnews-5', type: 'CARDNEWS' as const, icon: '☕', order: 4,
     title: '잠을 못자게 만드는 습관', desc: '무심코 하는 습관들이 수면을 방해할 수 있습니다.',
     content: `![1](/images/cardnews/part5/1.png)\n\n![2](/images/cardnews/part5/2.png)\n\n![3](/images/cardnews/part5/3.png)\n\n![4](/images/cardnews/part5/4.png)\n\n![5](/images/cardnews/part5/5.png)\n\n![6](/images/cardnews/part5/6.png)\n\n![7](/images/cardnews/part5/7.png)`
   },
   {
-    slug: 'cardnews-6', type: 'CARDNEWS' as const, icon: '📱', order: 5,
+    slug: 'cardnews-6', type: 'CARDNEWS' as const, icon: '⏰', order: 5,
     title: '잠은 드는데, 꼭 새벽에 깨나요?', desc: '새벽에 깨서 다시 잠들지 못하는 원인과 해결책을 알아봅니다.',
     content: `![1](/images/cardnews/part6/1.png)\n\n![2](/images/cardnews/part6/2.png)\n\n![3](/images/cardnews/part6/3.png)\n\n![4](/images/cardnews/part6/4.png)\n\n![5](/images/cardnews/part6/5.png)\n\n![6](/images/cardnews/part6/6.png)\n\n![7](/images/cardnews/part6/7.png)`
   },
   {
-    slug: 'cardnews-7', type: 'CARDNEWS' as const, icon: '📱', order: 6,
+    slug: 'cardnews-7', type: 'CARDNEWS' as const, icon: '🥱', order: 6,
     title: '분명 잤는데, 왜 아침마다 피곤할까요?', desc: '수면의 질이 떨어지는 이유와 개선 방법을 알아봅니다.',
     content: `![1](/images/cardnews/part7/1.png)\n\n![2](/images/cardnews/part7/2.png)\n\n![3](/images/cardnews/part7/3.png)\n\n![4](/images/cardnews/part7/4.png)\n\n![5](/images/cardnews/part7/5.png)\n\n![6](/images/cardnews/part7/6.png)\n\n![7](/images/cardnews/part7/7.png)`
   },
   {
-    slug: 'cardnews-8', type: 'CARDNEWS' as const, icon: '📱', order: 7,
+    slug: 'cardnews-8', type: 'CARDNEWS' as const, icon: '👃', order: 7,
     title: '코골이, 단순히 피곤해서 나는 소리일까요?', desc: '코골이의 원인과 수면무호흡증의 위험성을 알아봅니다.',
     content: `![1](/images/cardnews/part8/1.png)\n\n![2](/images/cardnews/part8/2.png)\n\n![3](/images/cardnews/part8/3.png)\n\n![4](/images/cardnews/part8/4.png)\n\n![5](/images/cardnews/part8/5.png)\n\n![6](/images/cardnews/part8/6.png)\n\n![7](/images/cardnews/part8/7.png)`
   },
   {
-    slug: 'cardnews-9', type: 'CARDNEWS' as const, icon: '📱', order: 8,
+    slug: 'cardnews-9', type: 'CARDNEWS' as const, icon: '🧘‍♀️', order: 8,
     title: '잠이 오는 저녁 루틴 만들기', desc: '건강한 수면을 위한 취침 전 루틴을 알아봅니다.',
     content: `![1](/images/cardnews/part9/1.png)\n\n![2](/images/cardnews/part9/2.png)\n\n![3](/images/cardnews/part9/3.png)\n\n![4](/images/cardnews/part9/4.png)\n\n![5](/images/cardnews/part9/5.png)\n\n![6](/images/cardnews/part9/6.png)\n\n![7](/images/cardnews/part9/7.png)`
   },
   {
-    slug: 'cardnews-10', type: 'CARDNEWS' as const, icon: '📱', order: 9,
+    slug: 'cardnews-10', type: 'CARDNEWS' as const, icon: '📝', order: 9,
     title: '수면일지를 쓰면 치료 방향이 보입니다.', desc: '수면일지의 중요성과 작성 방법을 알아봅니다.',
     content: `![1](/images/cardnews/part10/1.png)\n\n![2](/images/cardnews/part10/2.png)\n\n![3](/images/cardnews/part10/3.png)\n\n![4](/images/cardnews/part10/4.png)\n\n![5](/images/cardnews/part10/5.png)\n\n![6](/images/cardnews/part10/6.png)\n\n![7](/images/cardnews/part10/7.png)`
   },

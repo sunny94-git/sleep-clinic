@@ -68,3 +68,24 @@ model FAQ {
 
   @@map("faqs")
 }
+
+enum SleepInfoType {
+  ARTICLE
+  CARDNEWS
+}
+
+model SleepInfo {
+  id        String        @id @default(uuid())
+  slug      String        @unique
+  type      SleepInfoType @default(ARTICLE)
+  title     String
+  desc      String
+  icon      String
+  content   String        @db.Text
+  order     Int           @default(0)
+  createdAt DateTime      @default(now()) @map("created_at")
+  updatedAt DateTime      @updatedAt @map("updated_at")
+
+  @@map("sleep_info")
+}
+

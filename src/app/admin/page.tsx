@@ -9,10 +9,11 @@ interface Stats {
   totalQA: number;
   pendingQA: number;
   totalFAQ: number;
+  totalSleepInfo: number;
 }
 
 export default function AdminDashboard() {
-  const [stats, setStats] = useState<Stats>({ totalPosts: 0, totalQA: 0, pendingQA: 0, totalFAQ: 0 });
+  const [stats, setStats] = useState<Stats>({ totalPosts: 0, totalQA: 0, pendingQA: 0, totalFAQ: 0, totalSleepInfo: 0 });
 
   useEffect(() => {
     Promise.all([
@@ -20,12 +21,14 @@ export default function AdminDashboard() {
       fetch('/api/qa?limit=1').then(r => r.json()),
       fetch('/api/qa?status=pending&limit=1').then(r => r.json()),
       fetch('/api/faq').then(r => r.json()),
-    ]).then(([posts, qa, pendingQa, faqData]) => {
+      fetch('/api/sleep-info').then(r => r.json()),
+    ]).then(([posts, qa, pendingQa, faqData, sleepInfoData]) => {
       setStats({
         totalPosts: posts.total || 0,
         totalQA: qa.total || 0,
         pendingQA: pendingQa.total || 0,
         totalFAQ: faqData.faqs?.length || 0,
+        totalSleepInfo: sleepInfoData.sleepInfos?.length || 0,
       });
     }).catch(console.error);
   }, []);
@@ -35,6 +38,7 @@ export default function AdminDashboard() {
     { label: '전체 Q&A', value: stats.totalQA, icon: '❓', color: '#3A7CA5', href: '/admin/qa' },
     { label: '답변 대기', value: stats.pendingQA, icon: '⏳', color: '#f59e0b', href: '/admin/qa' },
     { label: '자주 묻는 질문', value: stats.totalFAQ, icon: '💬', color: '#10b981', href: '/admin/faq' },
+    { label: '수면 정보', value: stats.totalSleepInfo, icon: '💡', color: '#8b5cf6', href: '/admin/sleep-info' },
   ];
 
   return (
@@ -93,6 +97,14 @@ export default function AdminDashboard() {
               <h3 style={{ fontSize: '1.1rem', fontWeight: 700, marginBottom: 8 }}>💬 자주 묻는 질문 관리</h3>
               <p style={{ fontSize: '0.875rem', color: 'var(--color-text-secondary)' }}>
                 FAQ 등록, 수정, 삭제
+              </p>
+            </div>
+          </Link>
+          <Link href="/admin/sleep-info" style={{ textDecoration: 'none' }}>
+            <div className="glass-card" style={{ padding: 28 }}>
+              <h3 style={{ fontSize: '1.1rem', fontWeight: 700, marginBottom: 8 }}>💡 수면 정보 관리</h3>
+              <p style={{ fontSize: '0.875rem', color: 'var(--color-text-secondary)' }}>
+                수면정보 글 및 카드뉴스 관리
               </p>
             </div>
           </Link>

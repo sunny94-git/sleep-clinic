@@ -6,8 +6,6 @@ import { useRouter } from 'next/navigation';
 const CATEGORIES = [
   { value: 'consultation', label: '진료상담' },
   { value: 'treatment', label: '치료문의' },
-  { value: 'cost', label: '비용문의' },
-  { value: 'symptom', label: '증상문의' },
 ];
 
 export default function AskQuestionPage() {

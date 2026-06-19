@@ -78,6 +78,8 @@ export default function QAPage() {
       const data = await res.json();
       if (!res.ok) throw new Error(data.error || '인증에 실패했습니다.');
 
+      sessionStorage.setItem(`qa_verify_${id}`, JSON.stringify({ email: verifyEmail, password: verifyPassword }));
+
       setItems(prev => prev.map(item => item.id === id ? { ...item, ...data, _verified: true } : item));
       setVerifyingId(null);
       setExpandedId(id);

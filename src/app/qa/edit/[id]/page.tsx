@@ -41,6 +41,36 @@ export default function EditQuestionPage({ params }: { params: Promise<{ id: str
         }
         
         if (data.authorEmail === '***@***.***') {
+          const savedAuth = sessionStorage.getItem(`qa_verify_${id}`);
+          if (savedAuth) {
+            const { email, password } = JSON.parse(savedAuth);
+            setVerifyEmail(email);
+            setVerifyPassword(password);
+            
+            fetch(`/api/qa/${id}/verify`, {
+              method: 'POST',
+              headers: { 'Content-Type': 'application/json' },
+              body: JSON.stringify({ email, password }),
+            })
+            .then(r => r.json())
+            .then(vData => {
+              if (vData.error) throw new Error(vData.error);
+              setForm(f => ({
+                ...f,
+                category: vData.category,
+                title: vData.title,
+                content: vData.content,
+                authorEmail: vData.authorEmail,
+                isPrivate: vData.isPrivate,
+                password: password,
+              }));
+              setNeedsVerify(false);
+            })
+            .catch(() => {
+              setNeedsVerify(true);
+            });
+            return;
+          }
           setNeedsVerify(true);
         } else {
           setForm(f => ({

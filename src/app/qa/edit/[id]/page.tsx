@@ -23,6 +23,12 @@ export default function EditQuestionPage({ params }: { params: Promise<{ id: str
   const [submitting, setSubmitting] = useState(false);
   const [error, setError] = useState('');
 
+  const [needsVerify, setNeedsVerify] = useState(false);
+  const [verifyEmail, setVerifyEmail] = useState('');
+  const [verifyPassword, setVerifyPassword] = useState('');
+  const [verifyError, setVerifyError] = useState('');
+  const [isVerifying, setIsVerifying] = useState(false);
+
   useEffect(() => {
     fetch(`/api/qa/${id}`)
       .then(res => res.json())
@@ -33,14 +39,19 @@ export default function EditQuestionPage({ params }: { params: Promise<{ id: str
            router.push('/qa');
            return;
         }
-        setForm(f => ({
-          ...f,
-          category: data.category,
-          title: data.title,
-          content: data.content,
-          authorEmail: data.authorEmail,
-          isPrivate: data.isPrivate,
-        }));
+        
+        if (data.authorEmail === '***@***.***') {
+          setNeedsVerify(true);
+        } else {
+          setForm(f => ({
+            ...f,
+            category: data.category,
+            title: data.title,
+            content: data.content,
+            authorEmail: data.authorEmail,
+            isPrivate: data.isPrivate,
+          }));
+        }
       })
       .catch(err => setError(err.message))
       .finally(() => setLoading(false));
@@ -70,6 +81,36 @@ export default function EditQuestionPage({ params }: { params: Promise<{ id: str
     }
   };
 
+  const handleVerify = async (e: React.FormEvent) => {
+    e.preventDefault();
+    setIsVerifying(true);
+    setVerifyError('');
+    try {
+      const res = await fetch(`/api/qa/${id}/verify`, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ email: verifyEmail, password: verifyPassword }),
+      });
+      const data = await res.json();
+      if (!res.ok) throw new Error(data.error || '인증에 실패했습니다.');
+
+      setForm(f => ({
+        ...f,
+        category: data.category,
+        title: data.title,
+        content: data.content,
+        authorEmail: data.authorEmail,
+        isPrivate: data.isPrivate,
+        password: verifyPassword,
+      }));
+      setNeedsVerify(false);
+    } catch (err) {
+      setVerifyError(err instanceof Error ? err.message : '오류가 발생했습니다.');
+    } finally {
+      setIsVerifying(false);
+    }
+  };
+
   if (loading) return <div style={{ padding: 100, textAlign: 'center' }}>로딩중...</div>;
 
   return (
@@ -93,7 +134,56 @@ export default function EditQuestionPage({ params }: { params: Promise<{ id: str
             </div>
           )}
 
-          <form onSubmit={handleSubmit} className="glass-card" style={{ padding: 32 }}>
+          {needsVerify ? (
+            <div className="glass-card" style={{ padding: 32 }}>
+              <h2 style={{ fontSize: '1.2rem', fontWeight: 600, marginBottom: 16 }}>비공개 질문 인증</h2>
+              <p style={{ color: 'var(--color-text-secondary)', marginBottom: 24, fontSize: '0.9rem' }}>
+                비공개 질문을 수정하려면 작성 시 입력한 이메일과 비밀번호가 필요합니다.
+              </p>
+              
+              {verifyError && (
+                <div style={{
+                  padding: '12px 16px', borderRadius: 8, marginBottom: 20,
+                  background: 'rgba(192, 57, 43, 0.1)', border: '1px solid rgba(192, 57, 43, 0.15)',
+                  color: '#fca5a5', fontSize: '0.85rem',
+                }}>
+                  {verifyError}
+                </div>
+              )}
+
+              <form onSubmit={handleVerify}>
+                <div style={{ marginBottom: 16 }}>
+                  <input
+                    type="email"
+                    placeholder="이메일"
+                    value={verifyEmail}
+                    onChange={e => setVerifyEmail(e.target.value)}
+                    required
+                    className="input-field"
+                  />
+                </div>
+                <div style={{ marginBottom: 24 }}>
+                  <input
+                    type="password"
+                    placeholder="비밀번호"
+                    value={verifyPassword}
+                    onChange={e => setVerifyPassword(e.target.value)}
+                    required
+                    className="input-field"
+                  />
+                </div>
+                <div style={{ display: 'flex', gap: 12 }}>
+                  <button type="submit" className="btn-primary" disabled={isVerifying}>
+                    {isVerifying ? '확인 중...' : '본인 확인'}
+                  </button>
+                  <button type="button" className="btn-secondary" onClick={() => router.back()}>
+                    취소
+                  </button>
+                </div>
+              </form>
+            </div>
+          ) : (
+            <form onSubmit={handleSubmit} className="glass-card" style={{ padding: 32 }}>
             <div style={{ marginBottom: 24 }}>
               <label style={{ display: 'block', fontSize: '0.85rem', fontWeight: 600, marginBottom: 8, color: 'var(--color-text-secondary)' }}>
                 상담 분야
@@ -181,6 +271,7 @@ export default function EditQuestionPage({ params }: { params: Promise<{ id: str
               </button>
             </div>
           </form>
+          )}
         </div>
       </section>
     </div>

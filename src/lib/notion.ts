@@ -20,27 +20,11 @@ export async function syncQaToNotion(item: {
 
   try {
     const categoryLabel = item.category === 'consultation' ? '진료상담' : '치료문의';
-
-    // To handle content safely with Notion's 2000 character limit per block,
-    // we split the content into multiple paragraph blocks if necessary.
-    const blocks = [];
-    const maxLen = 2000;
-    for (let i = 0; i < item.content.length; i += maxLen) {
-      blocks.push({
-        object: 'block',
-        type: 'paragraph',
-        paragraph: {
-          rich_text: [
-            {
-              type: 'text',
-              text: {
-                content: item.content.substring(i, i + maxLen),
-              },
-            },
-          ],
-        },
-      });
-    }
+    
+    // Slice content to fit Notion's rich text limit (2000 chars)
+    const truncatedContent = item.content.length > 2000 
+      ? item.content.substring(0, 1997) + '...' 
+      : item.content;
 
     await notion.pages.create({
       parent: { database_id: databaseId },
@@ -55,9 +39,11 @@ export async function syncQaToNotion(item: {
           ],
         },
         '카테고리': {
-          select: {
-            name: categoryLabel,
-          },
+          multi_select: [
+            {
+              name: categoryLabel,
+            },
+          ],
         },
         '이메일': {
           email: item.authorEmail,
@@ -65,9 +51,16 @@ export async function syncQaToNotion(item: {
         '비공개': {
           checkbox: item.isPrivate,
         },
+        '본문': {
+          rich_text: [
+            {
+              text: {
+                content: truncatedContent,
+              },
+            },
+          ],
+        },
       },
-      // @ts-ignore - Dynamic blocks structure
-      children: blocks,
     });
     console.log('Successfully synced QA to Notion:', item.title);
   } catch (error) {

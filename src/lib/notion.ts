@@ -124,3 +124,41 @@ export async function updateQaNotionStatus(title: string, email: string, status:
     console.error('Failed to update QA status in Notion:', error);
   }
 }
+
+export async function deleteQaFromNotion(title: string, email: string) {
+  if (!databaseId || !process.env.NOTION_API_KEY) return;
+
+  try {
+    const res = await fetch(`https://api.notion.com/v1/databases/${databaseId}/query`, {
+      method: 'POST',
+      headers: {
+        'Authorization': `Bearer ${process.env.NOTION_API_KEY}`,
+        'Notion-Version': '2022-06-28',
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({
+        filter: {
+          and: [
+            { property: '제목', title: { equals: title } },
+            { property: '이메일', email: { equals: email } },
+          ],
+        },
+      }),
+    });
+
+    if (!res.ok) return;
+    const response = await res.json();
+
+    if (response.results && response.results.length > 0) {
+      const pageId = response.results[0].id;
+      // 노션에서 항목 삭제(휴지통으로 이동)는 archived 속성을 true로 변경하는 것입니다.
+      await notion.pages.update({
+        page_id: pageId,
+        archived: true,
+      });
+      console.log('Successfully deleted QA from Notion:', title);
+    }
+  } catch (error) {
+    console.error('Failed to delete QA from Notion:', error);
+  }
+}

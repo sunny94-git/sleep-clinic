@@ -4,7 +4,7 @@ import { auth } from '@/lib/auth';
 import { sanitizeText } from '@/lib/sanitize';
 import { sendAnswerNotification } from '@/lib/mailer';
 import { compare } from 'bcryptjs';
-import { updateQaNotionStatus } from '@/lib/notion';
+import { updateQaNotionStatus, deleteQaFromNotion } from '@/lib/notion';
 
 export async function GET(
   request: NextRequest,
@@ -137,6 +137,10 @@ export async function DELETE(
     }
 
     await prisma.qAItem.delete({ where: { id } });
+
+    // Update Notion (non-blocking)
+    deleteQaFromNotion(existing.title, existing.authorEmail).catch(console.error);
+
     return NextResponse.json({ success: true });
   } catch (error) {
     console.error('QA DELETE error:', error);

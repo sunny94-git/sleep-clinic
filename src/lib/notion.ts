@@ -83,17 +83,30 @@ export async function updateQaNotionStatus(title: string, email: string, status:
   if (!databaseId || !process.env.NOTION_API_KEY) return;
 
   try {
-    const response = await notion.databases.query({
-      database_id: databaseId,
-      filter: {
-        and: [
-          { property: '제목', title: { equals: title } },
-          { property: '이메일', email: { equals: email } },
-        ],
+    const res = await fetch(`https://api.notion.com/v1/databases/${databaseId}/query`, {
+      method: 'POST',
+      headers: {
+        'Authorization': `Bearer ${process.env.NOTION_API_KEY}`,
+        'Notion-Version': '2022-06-28',
+        'Content-Type': 'application/json',
       },
+      body: JSON.stringify({
+        filter: {
+          and: [
+            { property: '제목', title: { equals: title } },
+            { property: '이메일', email: { equals: email } },
+          ],
+        },
+      }),
     });
 
-    if (response.results.length > 0) {
+    if (!res.ok) {
+      throw new Error(`Notion API error: ${res.statusText}`);
+    }
+
+    const response = await res.json();
+
+    if (response.results && response.results.length > 0) {
       const pageId = response.results[0].id;
       await notion.pages.update({
         page_id: pageId,

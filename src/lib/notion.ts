@@ -12,6 +12,7 @@ export async function syncQaToNotion(item: {
   authorEmail: string;
   content: string;
   isPrivate: boolean;
+  createdAt?: Date;
 }) {
   if (!databaseId || !process.env.NOTION_API_KEY) {
     console.warn('Notion API Key or Database ID is missing. Skipping Notion sync.');
@@ -51,6 +52,16 @@ export async function syncQaToNotion(item: {
         '비공개': {
           checkbox: item.isPrivate,
         },
+        '작성일': {
+          date: {
+            start: item.createdAt ? item.createdAt.toISOString() : new Date().toISOString(),
+          },
+        },
+        '답변상태': {
+          select: {
+            name: '대기중',
+          },
+        },
         '본문': {
           rich_text: [
             {
@@ -65,5 +76,38 @@ export async function syncQaToNotion(item: {
     console.log('Successfully synced QA to Notion:', item.title);
   } catch (error) {
     console.error('Failed to sync QA to Notion:', error);
+  }
+}
+
+export async function updateQaNotionStatus(title: string, email: string, status: 'answered') {
+  if (!databaseId || !process.env.NOTION_API_KEY) return;
+
+  try {
+    const response = await notion.databases.query({
+      database_id: databaseId,
+      filter: {
+        and: [
+          { property: '제목', title: { equals: title } },
+          { property: '이메일', email: { equals: email } },
+        ],
+      },
+    });
+
+    if (response.results.length > 0) {
+      const pageId = response.results[0].id;
+      await notion.pages.update({
+        page_id: pageId,
+        properties: {
+          '답변상태': {
+            select: {
+              name: '답변완료',
+            },
+          },
+        },
+      });
+      console.log('Successfully updated QA status in Notion:', title);
+    }
+  } catch (error) {
+    console.error('Failed to update QA status in Notion:', error);
   }
 }

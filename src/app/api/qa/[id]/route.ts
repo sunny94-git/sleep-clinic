@@ -4,6 +4,7 @@ import { auth } from '@/lib/auth';
 import { sanitizeText } from '@/lib/sanitize';
 import { sendAnswerNotification } from '@/lib/mailer';
 import { compare } from 'bcryptjs';
+import { updateQaNotionStatus } from '@/lib/notion';
 
 export async function GET(
   request: NextRequest,
@@ -65,6 +66,10 @@ export async function PATCH(
       });
 
       await sendAnswerNotification(item.authorEmail, item.title);
+      
+      // Update Notion (non-blocking)
+      updateQaNotionStatus(item.title, item.authorEmail, 'answered').catch(console.error);
+
       return NextResponse.json(item);
     }
 

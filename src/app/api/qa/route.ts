@@ -91,6 +91,7 @@ export async function POST(request: NextRequest) {
       authorEmail: item.authorEmail,
       content: item.content,
       isPrivate: item.isPrivate,
+      createdAt: item.createdAt,
     }).catch(console.error);
 
     return NextResponse.json(item, { status: 201 });

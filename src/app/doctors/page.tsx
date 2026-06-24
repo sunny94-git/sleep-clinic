@@ -97,7 +97,7 @@ export default function DoctorsPage() {
                       <tr style={{ borderBottom: '1px solid #eee' }}>
                         <td style={{ padding: '12px 8px', borderRight: '1px solid #ddd', borderLeft: '1px solid #ddd' }}>오전</td>
                         <td style={{ padding: '12px 8px', borderRight: '1px solid #ddd', color: 'var(--color-primary)' }}>진료</td>
-                        <td style={{ padding: '12px 8px', borderRight: '1px solid #ddd', fontWeight: 600 }}>전공의</td>
+                        <td style={{ padding: '12px 8px', borderRight: '1px solid #ddd', color: 'var(--color-primary)' }}>진료</td>
                         <td style={{ padding: '12px 8px', borderRight: '1px solid #ddd', color: 'var(--color-primary)' }}>진료</td>
                         <td style={{ padding: '12px 8px', borderRight: '1px solid #ddd', color: 'var(--color-primary)' }}>진료</td>
                         <td style={{ padding: '12px 8px', borderRight: '1px solid #ddd', color: 'var(--color-primary)' }}>진료</td>
@@ -106,7 +106,7 @@ export default function DoctorsPage() {
                       <tr style={{ borderBottom: '1px solid #ddd' }}>
                         <td style={{ padding: '12px 8px', borderRight: '1px solid #ddd', borderLeft: '1px solid #ddd' }}>오후</td>
                         <td style={{ padding: '12px 8px', borderRight: '1px solid #ddd', color: 'var(--color-primary)' }}>진료</td>
-                        <td style={{ padding: '12px 8px', borderRight: '1px solid #ddd', color: 'var(--color-primary)' }}>진료</td>
+                        <td style={{ padding: '12px 8px', borderRight: '1px solid #ddd', fontWeight: 600 }}>전공의</td>
                         <td style={{ padding: '12px 8px', borderRight: '1px solid #ddd', color: 'var(--color-primary)' }}>진료</td>
                         <td style={{ padding: '12px 8px', borderRight: '1px solid #ddd', color: 'var(--color-primary)' }}>진료</td>
                         <td style={{ padding: '12px 8px', borderRight: '1px solid #ddd', color: 'var(--color-primary)' }}>진료</td>
@@ -205,18 +205,18 @@ export default function DoctorsPage() {
                       <tr style={{ borderBottom: '1px solid #eee' }}>
                         <td style={{ padding: '12px 8px', borderRight: '1px solid #ddd', borderLeft: '1px solid #ddd' }}>오전</td>
                         <td style={{ padding: '12px 8px', borderRight: '1px solid #ddd', color: 'var(--color-primary)' }}>진료</td>
-                        <td style={{ padding: '12px 8px', borderRight: '1px solid #ddd' }}></td>
+                        <td style={{ padding: '12px 8px', borderRight: '1px solid #ddd', fontWeight: 600 }}>전공의</td>
                         <td style={{ padding: '12px 8px', borderRight: '1px solid #ddd', color: 'var(--color-primary)' }}>진료</td>
-                        <td style={{ padding: '12px 8px', borderRight: '1px solid #ddd' }}></td>
+                        <td style={{ padding: '12px 8px', borderRight: '1px solid #ddd', fontWeight: 600 }}>전공의</td>
                         <td style={{ padding: '12px 8px', borderRight: '1px solid #ddd', color: 'var(--color-primary)' }}>진료</td>
-                        <td style={{ padding: '12px 8px', borderRight: '1px solid #ddd', color: 'var(--color-primary)' }}>진료(검사)</td>
+                        <td style={{ padding: '12px 8px', borderRight: '1px solid #ddd', color: 'var(--color-primary)' }}>진료</td>
                       </tr>
                       <tr style={{ borderBottom: '1px solid #ddd' }}>
                         <td style={{ padding: '12px 8px', borderRight: '1px solid #ddd', borderLeft: '1px solid #ddd' }}>오후</td>
                         <td style={{ padding: '12px 8px', borderRight: '1px solid #ddd', color: 'var(--color-primary)' }}>진료</td>
-                        <td style={{ padding: '12px 8px', borderRight: '1px solid #ddd' }}></td>
-                        <td style={{ padding: '12px 8px', borderRight: '1px solid #ddd', color: 'var(--color-primary)' }}>진료(동작분석)</td>
-                        <td style={{ padding: '12px 8px', borderRight: '1px solid #ddd' }}></td>
+                        <td style={{ padding: '12px 8px', borderRight: '1px solid #ddd', fontWeight: 600 }}>전공의</td>
+                        <td style={{ padding: '12px 8px', borderRight: '1px solid #ddd', color: 'var(--color-primary)' }}>진료</td>
+                        <td style={{ padding: '12px 8px', borderRight: '1px solid #ddd', fontWeight: 600 }}>전공의</td>
                         <td style={{ padding: '12px 8px', borderRight: '1px solid #ddd', color: 'var(--color-primary)' }}>진료</td>
                         <td style={{ padding: '12px 8px', borderRight: '1px solid #ddd' }}></td>
                       </tr>

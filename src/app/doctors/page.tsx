@@ -51,7 +51,7 @@ export default function DoctorsPage() {
                 marginBottom: 24,
                 overflow: 'hidden'
               }}>
-                [강선이 과장님 사진 공간]
+                <img src="/images/kang.png" alt="강선이 과장" style={{ width: '100%', height: '100%', objectFit: 'cover' }} />
               </div>
               <h3 style={{ fontSize: '1.4rem', fontWeight: 700, marginBottom: 16, color: 'var(--color-text-primary)' }}>강선이 과장</h3>
               <ul style={{ listStyle: 'none', padding: 0, margin: 0, color: 'var(--color-text-secondary)', fontSize: '0.95rem', lineHeight: 1.8 }}>
@@ -155,7 +155,7 @@ export default function DoctorsPage() {
                 marginBottom: 24,
                 overflow: 'hidden'
               }}>
-                [이상관 교수님 사진 공간]
+                <img src="/images/lee.png" alt="이상관 교수" style={{ width: '100%', height: '100%', objectFit: 'cover' }} />
               </div>
               <h3 style={{ fontSize: '1.4rem', fontWeight: 700, marginBottom: 16, color: 'var(--color-text-primary)' }}>이상관 교수</h3>
               <ul style={{ listStyle: 'none', padding: 0, margin: 0, color: 'var(--color-text-secondary)', fontSize: '0.9rem', lineHeight: 1.8 }}>

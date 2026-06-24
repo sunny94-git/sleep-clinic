@@ -79,6 +79,7 @@ export default function Footer() {
             <div style={{ display: 'flex', flexDirection: 'column', gap: 10 }}>
               {[
                 { href: '/about', label: '클리닉 소개' },
+                { href: '/doctors', label: '의료진 소개' },
                 { href: '/isi', label: '자가진단' },
                 { href: '/sleep-info', label: '수면정보' },
                 { href: '/board', label: '게시판' },

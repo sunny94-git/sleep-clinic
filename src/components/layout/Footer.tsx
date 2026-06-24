@@ -59,8 +59,10 @@ export default function Footer() {
           <div>
             <div style={{ display: 'flex', alignItems: 'center', gap: 10, marginBottom: 16 }}>
               <div>
-                <img src="/images/logo.png" alt="원광대학교 광주한방병원" style={{ height: 49, mixBlendMode: 'multiply', marginBottom: 4, display: 'block' }} />
-                <div style={{ fontWeight: 700, fontSize: '0.95rem' }}>수면장애클리닉</div>
+                <a href="https://wkugh.com/2022/" target="_blank" rel="noopener noreferrer" style={{ display: 'block' }}>
+                  <img src="/images/logo.png" alt="원광대학교 광주한방병원" style={{ height: 49, mixBlendMode: 'multiply', marginBottom: 4, display: 'block' }} />
+                </a>
+                <div style={{ fontWeight: 700, fontSize: '0.95rem', marginTop: 4 }}>수면장애클리닉</div>
               </div>
             </div>
             <p style={{ fontSize: '0.85rem', color: 'var(--color-text-secondary)', lineHeight: 1.8 }}>
